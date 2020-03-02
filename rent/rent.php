@@ -1,4 +1,5 @@
 <?php
+
     class Rent {
         
         private $user;

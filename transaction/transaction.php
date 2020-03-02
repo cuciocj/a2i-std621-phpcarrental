@@ -1,5 +1,6 @@
 <?php
-    include_once 'user.php';
+    require_once 'config.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/' . PROJECT_NAME . '/user/user.php';
     include_once 'vehicle.php';
 
     class Transaction {

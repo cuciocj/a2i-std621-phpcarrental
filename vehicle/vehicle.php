@@ -9,6 +9,16 @@
         private $transmission;
         private $image;
         private $price;
+
+        public function __construct($id, $name, $body, $color, $transmission, $image, $price) {
+            $this->id = $id;
+            $this->name = $name;
+            $this->body = $body;
+            $this->color = $color;
+            $this->transmission = $transmission;
+            $this->image = $image;
+            $this->price = $price;
+        }
         
         public function getId() {
             return $this->id;

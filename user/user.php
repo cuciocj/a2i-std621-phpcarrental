@@ -1,6 +1,6 @@
 <?php 
     include_once 'role.php';
-
+    
     class User {
 
         private $id;
@@ -77,5 +77,5 @@
 <!-- write to console in php -->
 <script>
     console.log(<?= json_encode($user->getUsername()); ?>);
-    console.log(<?= json_encode($user->getRole()->getName()); ?>); // r/programminghorror
+    console.log(<?= json_encode($user->getRole()->getName()); ?>);
 </script>
