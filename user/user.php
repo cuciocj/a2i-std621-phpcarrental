@@ -1,5 +1,5 @@
 <?php 
-    include_once 'role.php';
+    include_once './role/role.php';
     
     class User {
 
@@ -69,13 +69,8 @@
     }
 
     // sample user class
-    $user = new User();
-    $user->setUsername("sample_uname");
-    $user->setRole(new Role(1, 'role_user'));
+    // $user = new User();
+    // $user->setUsername("sample_uname");
+    // $user->setRole(new Role(1, 'role_user'));
 
 ?>
-<!-- write to console in php -->
-<script>
-    console.log(<?= json_encode($user->getUsername()); ?>);
-    console.log(<?= json_encode($user->getRole()->getName()); ?>);
-</script>

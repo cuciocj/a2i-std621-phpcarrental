@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     include_once './vehicle/vehicleDao.php';
 
     $vehicleDao = new VehicleDao();
@@ -7,16 +9,9 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<html>
-<?php include 'includes/head.php'; ?>
-
+<?php include './includes/head.php'; ?>
 <body>
-    <?php include 'includes/header.php'; ?>
-
-    <a href="index.php">
-        <h1>RACAR</h1>
-    </a>
-
+    <?php include './includes/header.php'; ?>
     <?php
     foreach ($vehicles as $vehicle) {
         echo "<div class='card' style='width: 18rem;'>"
@@ -29,7 +24,9 @@
                         ."transmission: " . $vehicle->getTransmission() . "<br>"
                         ."price: " . $vehicle->getPrice() . " p/w"
                     ."</p>"
-                    ."<a href='#' class='btn btn-primary'>Rent</a>"
+                    ."<a href='" . // rent.php if logged-in, login.php if not logged-in. refactor.
+                        ((isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) ? "rent.php" : "login.php") 
+                    . "' class='btn btn-primary'>Rent</a>"
                 ."</div>"
             ."</div>";
     }
