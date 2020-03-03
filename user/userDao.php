@@ -37,13 +37,16 @@
                         $user->setRole($row['role_id']);
                     }
                 } else {
-                    echo "cannot find user [" . $user->getUsername() . "]";
-                    unset($user);
+                    //echo "cannot find user [" . $user->getUsername() . "]";
+                    $user = new User();
                 }
+
+                $stmt->close();
             } else {
-                echo "couldn't execute sql: " . $sql . " error: " . $con->error;
-                unset($user);
+                //echo "couldn't execute sql: " . $sql . " error: " . $con->error;
+                $user = new User();
             }
+            $con->close();
 
             return $user;
         }
