@@ -28,13 +28,14 @@
                         ."transmission: " . $vehicle->getTransmission() . "<br>"
                         ."price: " . $vehicle->getPrice() . " p/w"
                     ."</p>"
-                    ."<a href='" . // rent.php if logged-in, login.php if not logged-in. refactor.
+                    ."<a href='" . // rent.php if logged-in, login.php if not logged-in. refactor this please.
                         ((isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) ? "rent.php" : "login.php") 
-                    . "' class='btn btn-primary'>Rent</a>"
+                    . "' class='btn btn-primary'>Book this Car</a>"
                 ."</div>"
             ."</div>";
     }
     ?>
+<?php include './includes/footer.php'; ?>
 </body>
 
 </html>
