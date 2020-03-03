@@ -28,7 +28,8 @@
                             $row['color'],
                             $row['transmission'],
                             $row['image'],
-                            $row['price']
+                            $row['price'],
+                            $row['is_reserved']
                         );
 
                         array_push($vehicles, $vehicle);

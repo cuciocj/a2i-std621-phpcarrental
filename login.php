@@ -6,7 +6,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     exit;
 }
 
-include_once 'user/userDao.php';
+include_once './user/userDao.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = new User();
