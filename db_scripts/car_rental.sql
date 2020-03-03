@@ -13,8 +13,9 @@ CREATE TABLE `vehicles` (
   `transmission` varchar(10) NOT NULL,
   `image` varchar(255) NOT NULL,
   `price` float NOT NULL DEFAULT '0',
+  `is_reserved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
