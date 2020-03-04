@@ -21,17 +21,15 @@
             if($result = $con->query($sql)) {
                 if($result->num_rows > 0) {
                     while ($row = $result->fetch_array()) {
-                        $vehicle = new Vehicle(
-                            $row['id'],
-                            $row['name'],
-                            $row['body'],
-                            $row['color'],
-                            $row['transmission'],
-                            $row['image'],
-                            $row['price'],
-                            $row['is_reserved']
-                        );
-
+                        $vehicle = new Vehicle();
+                        $vehicle->id = $row['id'];
+                        $vehicle->name = $row['name'];
+                        $vehicle->body = $row['body'];
+                        $vehicle->color = $row['color'];
+                        $vehicle->transmission = $row['transmission'];
+                        $vehicle->image = $row['image'];
+                        $vehicle->price = $row['price'];
+                        $vehicle->isReserved = $row['is_reserved'];
                         array_push($vehicles, $vehicle);
                     }
                 }
