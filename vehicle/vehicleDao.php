@@ -1,6 +1,4 @@
 <?php
-    include_once './commons/db.php';
-    include_once 'vehicle.php';
 
     class VehicleDao {
 
@@ -39,6 +37,10 @@
             $con->close();
 
             return $vehicles;
+        }
+
+        public function update($vehicle) {
+
         }
     }
 ?>
