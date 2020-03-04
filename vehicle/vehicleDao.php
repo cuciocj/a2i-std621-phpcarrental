@@ -39,8 +39,10 @@
             return $vehicles;
         }
 
-        public function update($vehicle) {
-
+        // TODO
+        public function updateReserve($vehicle, $is_reserved) {
+            $sql = "update " . $this->table
+                . ' set is_reserved = ? where id = ?';
         }
     }
 ?>
