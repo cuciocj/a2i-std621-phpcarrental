@@ -21,8 +21,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $response = $rentDao->insert($rent);
 
     if($response === true) {
-        // TODO: update vehicle status
-        echo 'pasok sa banga';
+        // TODO: send acknowledgement receipt email
+        echo 'success';
     } else {
         echo 'fail';
     }
