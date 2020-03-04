@@ -28,8 +28,6 @@
 
             if($stmt->execute() === true) {
                $flag = true;
-            } else {
-                echo "couldn't execute sql: " . $con->error;
             }
 
             $stmt->close();
