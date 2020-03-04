@@ -6,7 +6,10 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     exit;
 }
 
+include_once './commons/db.php';
 include_once './user/userDao.php';
+include_once './role/role.php';
+include_once './user/user.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = new User();
@@ -34,8 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <?php include './includes/head.php'; ?>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 <body>
