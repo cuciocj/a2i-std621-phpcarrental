@@ -1,6 +1,4 @@
 <?php
-    include_once './commons/db.php';
-    include_once 'user.php';
 
     class UserDao {
 
@@ -13,10 +11,10 @@
         }
 
         public function find($user) {
-            $sql = "select * from " . $this->table . " where username = ? and password = ?;";
+            $sql = "select * from " . $this->table 
+                . " where username = ? and password = ?;";
 
             $con = $this->db->getConnection();
-
             $stmt = $con->prepare($sql);
             $stmt->bind_param("ss", $p_username, $p_password);
 
