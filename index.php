@@ -1,7 +1,9 @@
 <?php
     session_start();
 
+    include_once './commons/db.php';
     include_once './vehicle/vehicleDao.php';
+    include_once './vehicle/vehicle.php';
 
     if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
         echo 'Hello ' . $_SESSION["session_name"];
@@ -23,29 +25,47 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script src="js/datepicker.js"></script>
+    <script type="text/javascript" src="js/datepicker.js"></script>
 
     <script>
         $(document).ready(function() {
-            $('.book').on('click', function() {
 
-                console.log(this.id + " " );
-
-            });
+            var carInfo;
 
             $('#carModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget); // Button that triggered the modal
-                var carInfo = button.data('info'); // Extract info from data-* attributes
+                carInfo = button.data('info'); // Extract info from data-* attributes
                 // // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                 // // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
                 console.log(carInfo);
+                carId = carInfo.id;
                 var modal = $(this);
-                $(".modal-body #carImage").attr("src", carInfo.image);
-                modal.find('.car-name').text(carInfo.name);
-                modal.find('.car-body').text(carInfo.body);
-                modal.find('.car-color').text(carInfo.color);
-                modal.find('.car-transmission').text(carInfo.transmission);
-                modal.find('.car-price').text(carInfo.price);
+                $('.modal-body #car-id').attr('value', carInfo.id);
+                $('.modal-body #carImage').attr('src', carInfo.image);
+                modal.find('#car-name').text(carInfo.name);
+                modal.find('#car-body').text(carInfo.body);
+                modal.find('#car-color').text(carInfo.color);
+                modal.find('#car-transmission').text(carInfo.transmission);
+                modal.find('#car-price').text(carInfo.price);
+
+            });
+
+            $('#btn_book').on('click', function() {
+                var startDate = $('#from').val();
+                var endDate = $('#to').val();
+
+                console.log(carInfo.id + " <?= $_SESSION["session_username"] ?> " + startDate + " " + endDate);
+
+                $.post('./rent/rentController.php',
+                    {
+                        vehicle_id: carInfo.id,
+                        customer_id: '<?= $_SESSION["session_userid"] ?>',
+                        start_date: startDate,
+                        end_date: endDate
+                    },
+                    function(data, status, jqXHR) {
+                        console.log(status + ' : ' + data);
+                    });
             });
 
         });
@@ -55,7 +75,6 @@
 <body>
     <?php include './includes/header.php'; ?>
     <?php foreach ($vehicles as $vehicle) { ?>
-        
         <div class='card' style='width: 18rem;'>
             <img src='<?= $vehicle->getImage() ?>' class='card-img-top' alt='...'>
             <div class='card-body'>
@@ -86,21 +105,22 @@
                 </div>
                 <div class="modal-body">
                     <img id="carImage" class="card-img-top" src="" alt="...">
+                    <input type="hidden" id="car-id" value="">
                     <label for="from"><strong>From</strong></label>
                     <input type="text" id="from" name="from">
                     <label for="to"><strong>to</strong></label>
                     <input type="text" id="to" name="to">
                     <div>
-                        <strong>Name:</strong> <span class="car-name"></span><br>
-                        <strong>Body:</strong> <span class="car-body"></span><br>
-                        <strong>Color:</strong> <span class="car-color"></span><br>
-                        <strong>Transmission:</strong> <span class="car-transmission"></span><br>
-                        <strong>Price:</strong> <span class="car-price"></span><br>
+                        <strong>Name:</strong> <span id="car-name"></span><br>
+                        <strong>Body:</strong> <span id="car-body"></span><br>
+                        <strong>Color:</strong> <span id="car-color"></span><br>
+                        <strong>Transmission:</strong> <span id="car-transmission"></span><br>
+                        <strong>Price:</strong> $<span id="car-price"></span> per day<br>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button id="btn_book" type="button" class="btn btn-primary book">Book Now</button>
+                    <button id="btn_book" type="button" class="btn btn-primary">Book Now</button>
                 </div>
             </div>
         </div>
