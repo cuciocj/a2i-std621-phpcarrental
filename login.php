@@ -32,9 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<?php include './includes/head.php'; ?>
-
+<head>
+    <?php include './includes/head.php'; ?>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
 <body>
     <?php include './includes/header.php'; ?>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
