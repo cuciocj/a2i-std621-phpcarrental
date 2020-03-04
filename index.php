@@ -64,7 +64,12 @@
                         end_date: endDate
                     },
                     function(data, status, jqXHR) {
-                        console.log(status + ' : ' + data);
+                        if(data == 'success') {
+                            alert('Acknowledgement receipt has been sent to your email.');
+                            $('#carModal').modal('hide');
+                        } else {
+                            alert('fail');
+                        }
                     });
             });
 
