@@ -68,7 +68,7 @@
                             alert('Acknowledgement receipt has been sent to your email.');
                             $('#carModal').modal('hide');
                         } else {
-                            alert('fail');
+                            alert("Failed booking vehicle. Make sure you haven't booked a car yet.");
                         }
                     });
             });
@@ -92,8 +92,9 @@
                 <?php } else { ?>
                     onclick="location.href='login.php';"
                 <?php } ?> 
+            <?php echo ($vehicle->isReserved() ? 'disabled' : ''); ?>
             >
-                Rent this Car
+                <?php echo ($vehicle->isReserved() ? 'Unavailable' : 'Rent this Car'); ?>
             </button>
         </div>
     <?php }; ?>
