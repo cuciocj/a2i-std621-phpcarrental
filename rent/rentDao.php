@@ -14,8 +14,8 @@
             $flag = false;
 
             $sql = "insert into " . $this->table
-                . '(user_id, start_date, end_date, vehicle_id) values'
-                . '(?, ?, ?, ?);';
+                . "(user_id, start_date, end_date, vehicle_id) values"
+                . "(?, ?, ?, ?);";
 
             $con = $this->db->getConnection();
             $stmt = $con->prepare($sql);
