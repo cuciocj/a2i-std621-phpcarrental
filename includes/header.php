@@ -4,11 +4,31 @@
         // if session has logged in, redirect to welcome.php
         //header("location: welcome.php");
         //exit;
-        echo '<header>'
+
+        if($_SESSION["session_role"] == 1) {
+            echo '<header>'
+                .'<li><a href="user_list.php">Users</a></li>'
+                .'<li><a href="car_list.php">Cars</a></li>'
+                .'<li><a href="profile.php">Profile</a></li>'
+                .'<li><a href="logout.php">Logout</a></li>'
+                .'</header>';
+        } else if($_SESSION["session_role"] == 2) {
+            echo '<header>'
+                .'<li><a href="car_list.php">Cars</a></li>'
+                .'<li><a href="profile.php">Profile</a></li>'
+                .'<li><a href="logout.php">Logout</a></li>'
+                .'</header>';
+        } else {
+            echo '<header>'
                 .'<li><a href="index.php">Home</a></li>'
                 .'<li><a href="profile.php">Profile</a></li>'
                 .'<li><a href="logout.php">Logout</a></li>'
-            .'</header>';
+                .'</header>';
+        }
+
+        
+
+        
         
     } else {
         echo '<header>'
@@ -17,5 +37,3 @@
                 .'<li><a href="register.php">Register</a></li>'
             .'</header>';
     }
-    
-?>
