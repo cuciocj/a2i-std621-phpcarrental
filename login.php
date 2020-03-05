@@ -1,5 +1,6 @@
 <?php
 session_start();
+$captcha_error = "";
 
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     header("location: index.php");
@@ -11,23 +12,42 @@ include_once './user/userDao.php';
 include_once './role/role.php';
 include_once './user/user.php';
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $user = new User();
-    $user->setUsername(trim($_POST["username"]));
-    $user->setPassword(trim($_POST["password"]));
-    $userDao = new UserDao();
 
-    $user = $userDao->find($user);
+    $captcha;
+    if(isset($_POST['g-recaptcha-response'])){
+        $captcha = $_POST['g-recaptcha-response'];
+    }
 
-    if (null !== $user->getId()) {
-        $_SESSION["loggedin"] = true;
-        $_SESSION["session_userid"] = $user->getId();
-        $_SESSION["session_username"] = $user->getUsername();
-        $_SESSION["session_name"] = $user->getName();
-        header("location: index.php");
-        exit;
+    if(!$captcha){
+        $captcha_error = "Please check the the captcha form.";
     } else {
-        echo 'not found';
+        $user = new User();
+        $user->setUsername(trim($_POST["username"]));
+        $user->setPassword(trim($_POST["password"]));
+        $userDao = new UserDao();
+    
+        $user = $userDao->find($user);
+    
+        if (null !== $user->getId()) {
+            $_SESSION["loggedin"] = true;
+            $_SESSION["session_userid"] = $user->getId();
+            $_SESSION["session_username"] = $user->getUsername();
+            $_SESSION["session_name"] = $user->getName();
+            $_SESSION["session_role"] = $user->getRole();
+    
+            if($user->getRole() == 1) {
+                header("location: user_list.php");
+            } else if($user->getRole() == 2) {
+                header("location: car_list.php");
+            } else {
+                header("location: index.php");
+            }
+            
+        } else {
+            echo 'not found';
+        }
     }
 }
 
@@ -54,8 +74,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" class="form-control" id="password" name="password">
         </div>
         <div class="form-group">
+            <p><?php echo $captcha_error; ?></p>
             <div class="g-recaptcha" data-sitekey="6LcMLt4UAAAAAM8mkcVtez61P8hCQ4dxYqwBiOxl"></div>
-            <br />
+            <br/>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
