@@ -70,7 +70,7 @@ $vehicles = $vehicleDao->list();
                                 <td><?= $vehicle->price; ?></td>
                                 <td><?= ($vehicle->isReserved == 1 ? 'reserved' : 'available'); ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#exampleModal">Edit</button>
+                                    <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#editCarModal">Edit</button>
                                     <button type="button" class="btn btn-secondary btn-sm btn-block">Remove</button>
                                 </td>
                             </tr>
@@ -83,17 +83,53 @@ $vehicles = $vehicleDao->list();
 
     <!-- Edit Car Modal -->
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="editCarModal" tabindex="-1" role="dialog" aria-labelledby="editCarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="editCarModalLabel">Modify Car Info</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form>
+                        <div>
+                            <label for="name"><strong>Name</strong></label>
+                            <input type="text" id="name" name="name" value="">
+                        </div>
+                        <div>
+                            <label for="body"><strong>Body</strong></label>
+                            <input type="text" id="body" name="body" value="">
+                        </div>
+                        <div>
+                            <label for="color"><strong>Color</strong></label>
+                            <input type="text" id="color" name="color" value="">
+                        </div>
+                        <div>
+                            <label for="transmission"><strong>Transmission</strong></label>
+                            <input type="text" id="transmission" name="transmission" value="">
+                        </div>
+                        <div>
+                            <label for="image_url"><strong>Image URL</strong></label>
+                            <input type="text" id="image_url" name="image_url" value="">
+                        </div>
+                        <div>
+                            <label for="price"><strong>Price</strong></label>
+                            <input type="text" id="price" name="price" value="">
+                        </div>
+                        <div>
+                            <label for="price"><strong>Status</strong></label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="available">
+                                <label class="form-check-label" for="inlineRadio1">available</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="reserved">
+                                <label class="form-check-label" for="inlineRadio2">reserved</label>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
