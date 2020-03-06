@@ -1,9 +1,11 @@
 <?php
     session_start();
 
+    // todo if staff goes to index.php, must redirect where he belongs
+
     include_once './commons/db.php';
-    include_once './vehicle/vehicleDao.php';
     include_once './vehicle/vehicle.php';
+    include_once './vehicle/vehicleDao.php';
 
     if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
         echo 'Hello ' . $_SESSION["session_name"];
@@ -67,6 +69,7 @@
                         if(data == 'success') {
                             alert('Acknowledgement receipt has been sent to your email.');
                             $('#carModal').modal('hide');
+                            location.reload();
                         } else {
                             alert("Failed booking vehicle. Make sure you haven't booked a car yet.");
                         }
@@ -88,7 +91,7 @@
             </div>
             <button class='btn btn-primary'
                 <?php if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true ) { ?>
-                    data-toggle='modal' data-target='#carModal' data-info='<?= json_encode($vehicle) ?>'
+                    data-toggle='modal' data-target='#carModal' data-info='<?= json_encode($vehicle); ?>'
                 <?php } else { ?>
                     onclick="location.href='login.php';"
                 <?php } ?> 
