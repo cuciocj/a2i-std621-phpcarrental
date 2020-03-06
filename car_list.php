@@ -12,9 +12,6 @@ if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
     exit;
 }
 
-// TODO:
-// rental_request page
-
 $vehicleDao = new VehicleDao();
 $vehicles = $vehicleDao->list();
 
