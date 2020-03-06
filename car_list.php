@@ -13,17 +13,11 @@ if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
 }
 
 // TODO:
-// list cars
-// add car menu
-// modify car
-// remove
 // rental_request page
 
 $vehicleDao = new VehicleDao();
 $vehicles = $vehicleDao->list();
 
-// echo '<pre>';
-// var_dump($vehicles);
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +31,10 @@ $vehicles = $vehicleDao->list();
 
     <script>
         $(document).ready(function() {
+
             var carInfo;
 
-            $('#editCarModal').on('show.bs.modal', function (event) {
+            $('#editCarModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 carInfo = button.data('info');
                 console.log(carInfo);
@@ -51,11 +46,16 @@ $vehicles = $vehicleDao->list();
                 modal.find('#image_url').attr('value', carInfo.image);
                 modal.find('#price').attr('value', carInfo.price);
                 modal.find(carInfo.isReserved == 1 ? '#status_reserved' :
-                             '#status_available').prop('checked', true);     
+                    '#status_available').prop('checked', true);
+            });
+
+            $('#removeCarModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                carInfo = button.data('info');
+                console.log(carInfo);
             });
 
             $('#btn_save').on('click', function() {
-                // console.log(carInfo.id);
                 var car_name = $('#name').val();
                 var car_body = $('#body').val();
                 var car_color = $('#color').val();
@@ -64,8 +64,7 @@ $vehicles = $vehicleDao->list();
                 var car_price = $('#price').val();
                 var car_isreserved = $('input[name="car_availability_option"]:checked').val();
 
-                $.post('./vehicle/vehicleController.php',
-                    {
+                $.post('./vehicle/vehicleController.php?mode=edit', {
                         carId: carInfo.id,
                         carName: car_name,
                         carBody: car_body,
@@ -76,7 +75,7 @@ $vehicles = $vehicleDao->list();
                         carIsReserved: car_isreserved
                     },
                     function(data, status, jqXHR) {
-                        if(data == 'success') {
+                        if (data == 'success') {
                             alert('Car details modified successfully!');
                             $('#editCarModal').modal('hide');
                             location.reload();
@@ -85,8 +84,51 @@ $vehicles = $vehicleDao->list();
                         }
                     });
             });
-        });
 
+            $('#btn_add').on('click', function() {
+                var car_name = $('#add_car_name').val();
+                var car_body = $('#add_car_body').val();
+                var car_color = $('#add_car_color').val();
+                var car_transmission = $('#add_car_transmission').val();
+                var car_image = $('#add_car_image_url').val();
+                var car_price = $('#add_car_price').val();
+
+                $.post('./vehicle/vehicleController.php?mode=add', {
+                        carName: car_name,
+                        carBody: car_body,
+                        carColor: car_color,
+                        carTransmission: car_transmission,
+                        carImage: car_image,
+                        carPrice: car_price
+                    },
+                    function(data, status, jqXHR) {
+                        if (data == 'success') {
+                            alert('Car added successfully!');
+                            $('#addCarModal').modal('hide');
+                            location.reload();
+                        } else {
+                            alert('Add failed. Please try again.');
+                        }
+                    });
+            });
+
+            $('#btn_delete').on('click', function() {
+                
+                $.post('./vehicle/vehicleController.php?mode=delete', {
+                        carId: carInfo.id
+                    },
+                    function(data, status, jqXHR) {
+                        if (data == 'success') {
+                            alert('Car deleted successfully!');
+                            $('#removeCarModal').modal('hide');
+                            location.reload();
+                        } else {
+                            alert('Delete failed. Please try again.');
+                        }
+                    });
+            });
+
+        });
     </script>
 </head>
 
@@ -94,6 +136,7 @@ $vehicles = $vehicleDao->list();
     <?php include './includes/header.php'; ?>
 
     <div class="container">
+        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addCarModal">Add Car</button>
         <div class="row">
             <div class="col-12">
                 <table class="table table-image">
@@ -124,9 +167,8 @@ $vehicles = $vehicleDao->list();
                                 <td><?= $vehicle->price; ?></td>
                                 <td><?= ($vehicle->isReserved == 1 ? 'reserved' : 'available'); ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm btn-block" 
-                                        data-toggle="modal" data-target="#editCarModal" data-info='<?= json_encode($vehicle); ?>'>Edit</button>
-                                    <button type="button" class="btn btn-secondary btn-sm btn-block">Remove</button>
+                                    <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#editCarModal" data-info='<?= json_encode($vehicle); ?>'>Edit</button>
+                                    <button type="button" class="btn btn-secondary btn-sm btn-block" data-toggle="modal" data-target="#removeCarModal" data-info='<?= json_encode($vehicle); ?>'>Remove</button>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -188,6 +230,73 @@ $vehicles = $vehicleDao->list();
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button id="btn_save" type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Car Modal -->
+    <div class="modal fade" id="addCarModal" tabindex="-1" role="dialog" aria-labelledby="addCarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCarModalLabel">Add New Car</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div>
+                            <label for="name"><strong>Name</strong></label>
+                            <input type="text" id="add_car_name" name="name" value="">
+                        </div>
+                        <div>
+                            <label for="body"><strong>Body</strong></label>
+                            <input type="text" id="add_car_body" name="body" value="">
+                        </div>
+                        <div>
+                            <label for="color"><strong>Color</strong></label>
+                            <input type="text" id="add_car_color" name="color" value="">
+                        </div>
+                        <div>
+                            <label for="transmission"><strong>Transmission</strong></label>
+                            <input type="text" id="add_car_transmission" name="transmission" value="">
+                        </div>
+                        <div>
+                            <label for="image_url"><strong>Image URL</strong></label>
+                            <input type="text" id="add_car_image_url" name="image_url" value="">
+                        </div>
+                        <div>
+                            <label for="price"><strong>Price</strong></label>
+                            <input type="text" id="add_car_price" name="price" value="">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="btn_add" type="button" class="btn btn-primary">Add Car</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remove Car Modal -->
+    <div class="modal fade" id="removeCarModal" tabindex="-1" role="dialog" aria-labelledby="removeCarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="removeCarModalLabel">Confirm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this car?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="btn_delete" type="button" class="btn btn-danger">Delete</button>
                 </div>
             </div>
         </div>
