@@ -39,10 +39,42 @@
             return $vehicles;
         }
 
-        // TODO
-        public function updateReserve($vehicle, $is_reserved) {
+        public function update($vehicle) {
+            $flag = false;
+
             $sql = "update " . $this->table
-                . ' set is_reserved = ? where id = ?';
+                . ' set name = ?, body = ?, color = ?, transmission = ?,'
+                . ' image = ?, price = ?, is_reserved = ? where id = ?';
+
+            $con = $this->db->getConnection();
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("sssssiii",
+                $p_name,
+                $p_body,
+                $p_color,
+                $p_transmission,
+                $p_image,
+                $p_price,
+                $p_isReserved,
+                $p_id
+            );
+
+            $p_name = $vehicle->getName();
+            $p_body = $vehicle->getBody();
+            $p_color = $vehicle->getColor();
+            $p_transmission = $vehicle->getTransmission();
+            $p_image = $vehicle->getImage();
+            $p_price = $vehicle->getPrice();
+            $p_isReserved = $vehicle->isReserved();
+            $p_id = $vehicle->getId();
+
+            if($stmt->execute() === true) {
+                $flag = true;
+            }
+
+            $stmt->close();
+            $con->close();
+            return $flag;
         }
     }
 ?>
