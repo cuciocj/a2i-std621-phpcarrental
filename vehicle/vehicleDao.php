@@ -39,12 +39,45 @@
             return $vehicles;
         }
 
+        public function add($vehicle) {
+            $flag = false;
+
+            $sql = "insert into " . $this->table . " (name, body, color, transmission, image, price)"
+                . " values (?, ?, ?, ?, ?, ?);";
+
+            $con = $this->db->getConnection();
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("sssssi",
+                $p_name,
+                $p_body,
+                $p_color,
+                $p_transmission,
+                $p_image,
+                $p_price
+            );
+
+            $p_name = $vehicle->getName();
+            $p_body = $vehicle->getBody();
+            $p_color = $vehicle->getColor();
+            $p_transmission = $vehicle->getTransmission();
+            $p_image = $vehicle->getImage();
+            $p_price = $vehicle->getPrice();
+
+            if($stmt->execute() === true) {
+                $flag = true;
+            }
+
+            $stmt->close();
+            $con->close();
+            return $flag;
+        }
+
         public function update($vehicle) {
             $flag = false;
 
             $sql = "update " . $this->table
-                . ' set name = ?, body = ?, color = ?, transmission = ?,'
-                . ' image = ?, price = ?, is_reserved = ? where id = ?';
+                . " set name = ?, body = ?, color = ?, transmission = ?,"
+                . " image = ?, price = ?, is_reserved = ? where id = ?;";
 
             $con = $this->db->getConnection();
             $stmt = $con->prepare($sql);
@@ -68,6 +101,27 @@
             $p_isReserved = $vehicle->isReserved();
             $p_id = $vehicle->getId();
 
+            if($stmt->execute() === true) {
+                $flag = true;
+            }
+
+            $stmt->close();
+            $con->close();
+            return $flag;
+        }
+
+        public function delete($vehicle) {
+            $flag = false;
+
+            $sql = "delete from " . $this->table
+                . " where id = ?;";
+            
+            $con = $this->db->getConnection();
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("i", $p_id);
+
+            $p_id = $vehicle->getId();
+            
             if($stmt->execute() === true) {
                 $flag = true;
             }
