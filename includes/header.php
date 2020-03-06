@@ -1,24 +1,23 @@
 <?php
 
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-        // if session has logged in, redirect to welcome.php
-        //header("location: welcome.php");
-        //exit;
 
-        if($_SESSION["session_role"] == 1) {
+        if($_SESSION["session_role"] == 1) {    // admin
             echo '<header>'
                 .'<li><a href="user_list.php">Users</a></li>'
                 .'<li><a href="car_list.php">Cars</a></li>'
+                .'<li><a href="rent_request.php">Rent Requests</a></li>'
                 .'<li><a href="profile.php">Profile</a></li>'
                 .'<li><a href="logout.php">Logout</a></li>'
                 .'</header>';
-        } else if($_SESSION["session_role"] == 2) {
+        } else if($_SESSION["session_role"] == 2) { // staff
             echo '<header>'
                 .'<li><a href="car_list.php">Cars</a></li>'
+                .'<li><a href="rent_request.php">Rent Requests</a></li>'
                 .'<li><a href="profile.php">Profile</a></li>'
                 .'<li><a href="logout.php">Logout</a></li>'
                 .'</header>';
-        } else {
+        } else {    // users/customers
             echo '<header>'
                 .'<li><a href="index.php">Home</a></li>'
                 .'<li><a href="profile.php">Profile</a></li>'
