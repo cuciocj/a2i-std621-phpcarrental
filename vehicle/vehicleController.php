@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $vehicle->setTransmission(trim($_POST["carTransmission"]));
         $vehicle->setImage(trim($_POST["carImage"]));
         $vehicle->setPrice(trim($_POST["carPrice"]));
-        $flag = $vehicleDao->add($vehicle);
+        $flag = $vehicleDao->add($vehicle); 
     } else if ($mode == "edit") {
         $vehicle->setId(trim($_POST["carId"]));
         $vehicle->setName(trim($_POST["carName"]));
