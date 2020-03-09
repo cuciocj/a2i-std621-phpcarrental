@@ -9,60 +9,91 @@ if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
 }
 
 include_once './commons/db.php';
+include_once './user/user.php';
+include_once './vehicle/vehicle.php';
 include_once './rent/rent.php';
 include_once './rent/rentDao.php';
 
 $rentDao = new RentDao();
 $rentRequests = $rentDao->list();
 
+// echo '<pre>';
+// print_r($rentRequests);
+// echo '</pre>';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <?php include './includes/head.php'; ?>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+           $('#approvalModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var data = button.data('info');
+                var mode = button.data('mode');
+                var message = $('#message').val();
+                console.log(data);
+                var modal = $(this);
+                modal.find('.modal-title').text(mode == 'approve' ? 'Approved' : 'Rejected');
+                modal.find('.message-body').text('The message will be sent to user\'s email [' + data.user.email + ']');
+
+                $.post('./rent/rentController.php', {
+                        mode: 'trx',
+                        status: mode,
+                        data: data,
+                        msg: message
+                });
+            });
+
+            $('#btn-close').on('click', function() {
+                $('#approvalModal').modal('hide');
+                location.reload();
+            });
+
+        });
+    </script>
 </head>
+
 <body>
     <?php include './includes/header.php'; ?>
     <div class="container">
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addCarModal">Add Car</button>
         <div class="row">
             <div class="col-12">
                 <table class="table table-image">
                     <thead>
                         <tr>
                             <th scope="col">Vehicle</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">ID</th>
+                            <th scope="col">User ID</th>
                             <th scope="col">Requester</th>
                             <th scope="col">Username</th>
                             <th scope="col">Email</th>
                             <th scope="col">From</th>
                             <th scope="col">To</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td scope="row"></td>
-                            <td class="w-25">
-                                
-                            </td>
-                        </tr>
-                        <?php foreach ($vehicles as $vehicle) { ?>
+                        <?php foreach ($rentRequests as $request) { ?>
                             <tr>
-                                <th scope="row"><?= $vehicle->id; ?></th>
-                                <td class="w-25">
-                                    <img src="<?= $vehicle->image; ?>" class="img-fluid img-thumbnail" alt="car">
-                                </td>
-                                <td><?= $vehicle->name; ?></td>
-                                <td><?= $vehicle->body; ?></td>
-                                <td><?= $vehicle->color; ?></td>
-                                <td><?= $vehicle->transmission; ?></td>
-                                <td><?= $vehicle->price; ?></td>
-                                <td><?= ($vehicle->isReserved == 1 ? 'reserved' : 'available'); ?></td>
+                                <th scope="row"><?= $request->getVehicle()->getName(); ?></td>
+                                <td><?= $request->getUser()->getId(); ?></td>
+                                <td><?= $request->getUser()->getName(); ?></td>
+                                <td><?= $request->getUser()->getUsername(); ?></td>
+                                <td><?= $request->getUser()->getEmail(); ?></td>
+                                <td><?= $request->getStartDate(); ?></td>
+                                <td><?= $request->getEndDate(); ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#editCarModal" data-info='<?= json_encode($vehicle); ?>'>Edit</button>
-                                    <button type="button" class="btn btn-secondary btn-sm btn-block" data-toggle="modal" data-target="#removeCarModal" data-info='<?= json_encode($vehicle); ?>'>Remove</button>
+                                    <textarea id="message" name="message"></textarea>
+                                    <button type="button" class="btn btn-primary btn-sm btn-block" 
+                                        data-toggle="modal" data-target="#approvalModal" data-info='<?= json_encode($request); ?>' data-mode="approve">Approve</button>
+                                    <button type="button" class="btn btn-secondary btn-sm btn-block" 
+                                        data-toggle="modal" data-target="#approvalModal" data-info='<?= json_encode($request); ?>' data-mode="reject">Reject</button>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -71,5 +102,26 @@ $rentRequests = $rentDao->list();
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div id="approvalModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="message-body"></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-close" type="button" class="btn btn-secondary">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
