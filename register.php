@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
             </div>
             <div class= "col-md-6">
-                <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
+               <!-- <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
         <div class="form-group">
             <label>Username</label>
             <input type="text" class="form-control" id="username" name="username">
@@ -89,7 +89,67 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <br/>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </form> -->
+
+    <form>
+
+ <div class="container">
+  <h3>About Us</h3><br>
+  
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">First Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Last Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="email">Email</label>
+      </div>
+      <div class="col-75">
+        <input type="email" id="email" name="email" placeholder="Your email id..">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="contact">Contact Number</label>
+      </div>
+      <div class="col-75">
+        <input type="number" id="contact" name="contact" placeholder="Your contact number..">
+      </div>
+    </div>
+
+    
+
+    <div class="col-md-2">
+        <!-- <div class="row">
+      <input type="submit" onclick="popup()"> -->
+      <button>Submit</button>
+
+    </div>
+
+        </div>
+      </div>
+    </div>
+    
+
+    
+  
+</div>
+</form>
                 
             </div>
             
