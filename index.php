@@ -82,15 +82,56 @@
     </script>
 </head>
 <body>
+
     <?php include './includes/header.php'; ?>
+    <!-- This is carousel-->
+
+     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    
+    <div class="carousel-inner">
+      <div class="carousel-item active" class="coverpic">
+        <img src="images/it1.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1>Book your Car now</h1>
+          <p>Price is what you pay, Value is what you get</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="images/it2.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1>Book your Car now</h1>
+          <p>Price is what you pay, Value is what you get</p>
+        </div>
+      </div>
+
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <br>
+  <br>
+
+    <br><br>
+
     <?php foreach ($vehicles as $vehicle) { ?>
-        <div class='card' style='width: 18rem;'>
+
+        <div class="container">
+            <div class="row">
+                <div class="md-col-4" class='card' style='width: 18rem;'>
             <img src='<?= $vehicle->getImage() ?>' class='card-img-top' alt='...'>
             <div class='card-body'>
                 <h5 class='card-title'><?= $vehicle->getName() ?></h5>
                 <p class='card-text'>$ <?= $vehicle->getPrice() ?> per day</p>
             </div>
             <button class='btn btn-primary'
+
+
                 <?php if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true ) { ?>
                     data-toggle='modal' data-target='#carModal' data-info='<?= json_encode($vehicle); ?>'
                 <?php } else { ?>
@@ -100,8 +141,24 @@
             >
                 <?php echo ($vehicle->isReserved() ? 'Unavailable' : 'Rent this Car'); ?>
             </button>
+            <br><br>
         </div>
+
+        <div class="md-col-4">
+            <h3>This is the section for next car</h3><br><br>
+        </div>
+        <div class="md-col-4">
+            <h3>This is the section for the next car3</h3><br><br>
+        </div>
+                
+            </div>
+            
+        </div>
+
+        
+
     <?php }; ?>
+
 
     <!-- Car Modal -->
     <div class="modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="carModalLabel" aria-hidden="true">
@@ -135,6 +192,7 @@
             </div>
         </div>
     </div>
+    <br><br>
 
 <?php include './includes/footer.php'; ?>
 </body>
