@@ -1,15 +1,13 @@
 <?php
-    require_once 'config.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/' . PROJECT_NAME . '/user/user.php';
-    include_once 'vehicle.php';
 
     class Transaction {
-        private $id;
-        private $user;
-        private $startDate;
-        private $endDate;
-        private $approvingOfficer;
-        private $vehicle;
+        
+        public $id;
+        public $user;
+        public $startDate;
+        public $endDate;
+        public $approvingOfficer;
+        public $vehicle;
 
         public function getId() {
             return $this->id;
