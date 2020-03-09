@@ -1,16 +1,16 @@
 <?php
 session_start();
 
-include_once './commons/db.php';
-include_once './vehicle/vehicle.php';
-include_once './vehicle/vehicleDao.php';
-
 if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
     echo 'Hello ' . $_SESSION["session_name"];
 } else {
     header("location: login.php");
     exit;
 }
+
+include_once './commons/db.php';
+include_once './vehicle/vehicle.php';
+include_once './vehicle/vehicleDao.php';
 
 $vehicleDao = new VehicleDao();
 $vehicles = $vehicleDao->list();
