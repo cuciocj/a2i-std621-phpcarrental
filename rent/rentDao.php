@@ -75,6 +75,26 @@
             $con->close();
             return $flag;
         }
+
+        public function delete($rent) {
+            $flag = false;
+
+            $sql = "delete from " . $this->table . " where user_id = ?";
+
+            $con = $this->db->getConnection();
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("i", $p_userId);
+
+            $p_userId = $rent->getUser();
+
+            if($stmt->execute() === true) {
+               $flag = true;
+            }
+
+            $stmt->close();
+            $con->close();
+            return $flag;
+        }
         
     }
 
