@@ -60,6 +60,7 @@
 
                 $.post('./rent/rentController.php',
                     {
+                        mode: 'add',
                         vehicle_id: carInfo.id,
                         customer_id: '<?= $_SESSION["session_userid"] ?>',
                         start_date: startDate,
