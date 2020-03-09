@@ -27,7 +27,6 @@
     } else {
         echo '<header>'
             . '<nav class="menu_open navbar_nav">'
-
             . '<ul class="menu_open navbar_ul">'
             . '<li class="menu_li">
                 <a class="navbar-brand" href="index.php">

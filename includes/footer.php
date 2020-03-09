@@ -14,9 +14,6 @@
 
       </div>
       <div class="col-md-2 footercol2">
-
-
-
         <h3>LINKS 1</h3>
         <ul>
           <!-- 
@@ -83,6 +80,5 @@
   </div>
   <div>
     <h6 class="footercopyright mb-0">Copyright 2020, <a href="#" class="footercopyright">Car Rental Services</a></h6>
-
   </div>
 </footer>
