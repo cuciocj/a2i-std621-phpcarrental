@@ -2,13 +2,13 @@
     
     class User {
 
-        private $id;
-        private $username;
-        private $password;
-        private $name;
-        private $email;
-        private $dateJoined;
-        private $role;
+        public $id;
+        public $username;
+        public $password;
+        public $name;
+        public $email;
+        public $dateJoined;
+        public $role;
 
         public function getId() {
             return $this->id;
