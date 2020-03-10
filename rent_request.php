@@ -17,9 +17,7 @@ include_once './rent/rentDao.php';
 $rentDao = new RentDao();
 $rentRequests = $rentDao->list();
 
-// echo '<pre>';
-// print_r($rentRequests);
-// echo '</pre>';
+echo phpinfo();
 ?>
 
 <!DOCTYPE html>
@@ -36,16 +34,16 @@ $rentRequests = $rentDao->list();
            $('#approvalModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var data = button.data('info');
-                var mode = button.data('mode');
+                var status = button.data('status');
                 var message = $('#message').val();
                 console.log(data);
                 var modal = $(this);
-                modal.find('.modal-title').text(mode == 'approve' ? 'Approved' : 'Rejected');
+                modal.find('.modal-title').text(status == 'approve' ? 'Approved' : 'Rejected');
                 modal.find('.message-body').text('The message will be sent to user\'s email [' + data.user.email + ']');
 
                 $.post('./rent/rentController.php', {
                         mode: 'trx',
-                        status: mode,
+                        status: status,
                         data: data,
                         msg: message
                 });
@@ -91,9 +89,9 @@ $rentRequests = $rentDao->list();
                                 <td>
                                     <textarea id="message" name="message"></textarea>
                                     <button type="button" class="btn btn-primary btn-sm btn-block" 
-                                        data-toggle="modal" data-target="#approvalModal" data-info='<?= json_encode($request); ?>' data-mode="approve">Approve</button>
+                                        data-toggle="modal" data-target="#approvalModal" data-info='<?= json_encode($request); ?>' data-status="approve">Approve</button>
                                     <button type="button" class="btn btn-secondary btn-sm btn-block" 
-                                        data-toggle="modal" data-target="#approvalModal" data-info='<?= json_encode($request); ?>' data-mode="reject">Reject</button>
+                                        data-toggle="modal" data-target="#approvalModal" data-info='<?= json_encode($request); ?>' data-status="reject">Reject</button>
                                 </td>
                             </tr>
                         <?php } ?>
