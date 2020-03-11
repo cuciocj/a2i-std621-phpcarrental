@@ -2,10 +2,10 @@
 
     class Rent {
         
-        private $user;
-        private $startDate;
-        private $endDate;
-        private $vehicle;
+        public $user;
+        public $startDate;
+        public $endDate;
+        public $vehicle;
 
         public function getUser() {
             return $this->user;

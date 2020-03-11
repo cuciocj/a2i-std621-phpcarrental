@@ -1,16 +1,16 @@
 <?php
 session_start();
 
-include_once './commons/db.php';
-include_once './vehicle/vehicle.php';
-include_once './vehicle/vehicleDao.php';
-
 if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
     echo 'Hello ' . $_SESSION["session_name"];
 } else {
     header("location: login.php");
     exit;
 }
+
+include_once './commons/db.php';
+include_once './vehicle/vehicle.php';
+include_once './vehicle/vehicleDao.php';
 
 $vehicleDao = new VehicleDao();
 $vehicles = $vehicleDao->list();
@@ -61,7 +61,8 @@ $vehicles = $vehicleDao->list();
                 var car_price = $('#price').val();
                 var car_isreserved = $('input[name="car_availability_option"]:checked').val();
 
-                $.post('./vehicle/vehicleController.php?mode=edit', {
+                $.post('./vehicle/vehicleController.php', {
+                        mode: 'edit',
                         carId: carInfo.id,
                         carName: car_name,
                         carBody: car_body,
@@ -90,7 +91,8 @@ $vehicles = $vehicleDao->list();
                 var car_image = $('#add_car_image_url').val();
                 var car_price = $('#add_car_price').val();
 
-                $.post('./vehicle/vehicleController.php?mode=add', {
+                $.post('./vehicle/vehicleController.php', {
+                        mode: 'add',
                         carName: car_name,
                         carBody: car_body,
                         carColor: car_color,

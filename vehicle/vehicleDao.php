@@ -32,14 +32,14 @@
                     }
                 }
             } else {
-                echo "couldn't execute sql: " . $sql . " error: " . $con->error;
+                echo "vehcileDao: couldn't execute sql: " . $sql . " error: " . $con->error;
             }
             $con->close();
 
             return $vehicles;
         }
 
-        public function add($vehicle) {
+        public function create($vehicle) {
             $flag = false;
 
             $sql = "insert into " . $this->table . " (name, body, color, transmission, image, price)"
