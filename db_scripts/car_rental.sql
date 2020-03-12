@@ -25,12 +25,12 @@ CREATE TABLE `users` (
   `email` varchar(30) NOT NULL,
   `date_joined` date NOT NULL,
   `role_id` int(11) NOT NULL,
+  `is_enabled` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`),
   KEY `role_id` (`role_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1
 
 CREATE TABLE `rent_requests` (
   `user_id` int(11) NOT NULL,
