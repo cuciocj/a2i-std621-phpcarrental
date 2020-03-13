@@ -122,6 +122,11 @@ h5 {
   font-family: "Times New Roman", Times, serif;
 }
 
+#map {
+  height: 100%;
+  width: 100%;
+}
+
 /*.nav {
   background-color: #aaa;
 }*/
