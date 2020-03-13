@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include './includes/header.php'; ?>
 
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-top: 7em">
             <div class="col-md-6">
                 <br><br>
                 <h3>CAR RENTAL SYSTEM</h3>
