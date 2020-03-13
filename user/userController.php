@@ -31,7 +31,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
     } else if ($_POST['mode'] == 'add') {
+        $user = new User();
+        $user->setName(trim($_POST["name"]));
+        $user->setUsername(trim($_POST["username"]));
+        $user->setPassword(trim($_POST["password"]));
+        $user->setEmail(trim($_POST["email"]));
+        $user->setRole(trim($_POST["role"]));
 
+        $userDao = new UserDao();
+        if($userDao->create($user)) {
+            echo 'success';
+        } else {
+            echo 'fail';
+        }
     } else if ($_POST['mode'] == 'delete') {
         $user = new User();
         $user->setId(trim($_POST["id"]));
