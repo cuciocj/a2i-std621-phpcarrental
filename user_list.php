@@ -153,7 +153,7 @@ $users = $userDao->list();
 
 <body>
     <?php include './includes/header.php'; ?>
-    <div class="container">
+    <div class="container" style="margin-top: 7em">
         <div class="row">
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addUserModal">Add User</button>
         </div>

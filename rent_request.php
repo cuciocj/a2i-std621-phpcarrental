@@ -59,7 +59,7 @@ $rentRequests = $rentDao->list();
 
 <body>
     <?php include './includes/header.php'; ?>
-    <div class="container">
+    <div class="container" style="margin-top: 7em">
         <div class="row">
             <div class="col-12">
                 <table class="table table-image">
