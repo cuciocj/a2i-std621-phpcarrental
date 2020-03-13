@@ -7,8 +7,8 @@ include_once './vehicle/vehicleDao.php';
 
 if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
     echo 'Hello ' . $_SESSION["session_name"];
-    if(isset($_SESSION['session_role'])) {
-        if($_SESSION['session_role'] == 1) {
+    if (isset($_SESSION['session_role'])) {
+        if ($_SESSION['session_role'] == 1) {
             header("location: user_list.php");
         } else if ($_SESSION['session_role'] == 2) {
             header("location: car_list.php");
@@ -142,7 +142,6 @@ $vehicles = $vehicleDao->list();
     <br><br>
 
     <?php foreach ($vehicles as $vehicle) { ?>
-
         <div class="container">
             <div class="row">
                 <div class="md-col-4" class='card' style='width: 18rem;'>
@@ -157,12 +156,12 @@ $vehicles = $vehicleDao->list();
                     <br><br>
                 </div>
 
-                <div class="md-col-4">
+                <!-- <div class="md-col-4">
                     <h3>This is the section for next car</h3><br><br>
                 </div>
                 <div class="md-col-4">
                     <h3>This is the section for the next car3</h3><br><br>
-                </div>
+                </div> -->
 
             </div>
 
