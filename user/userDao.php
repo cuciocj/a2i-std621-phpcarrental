@@ -79,6 +79,37 @@
             return $list;
         }
 
+        public function create($user) {
+            $flag = false;
+
+            $sql = "insert into " . $this->table . " (username, password, name, email, date_joined, role_id)"
+                    . " values (?, ?, ?, ?, date_format(now(), '%Y-%m-%d'), ?)";
+
+            $con = $this->db->getConnection();
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("ssssi",
+                $p_username,
+                $p_password,
+                $p_name,
+                $p_email,
+                $p_role
+            );
+
+            $p_username = $user->getUsername();
+            $p_password = $user->getPassword();
+            $p_name = $user->getName();
+            $p_email = $user->getEmail();
+            $p_role = $user->getRole();
+
+            if($stmt->execute() === true) {
+                $flag = true;
+            }
+
+            $stmt->close();
+            $con->close();
+            return $flag;
+        }
+
         public function update($user) {
             $flag = false;
 
