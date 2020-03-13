@@ -17,7 +17,6 @@ include_once './rent/rentDao.php';
 $rentDao = new RentDao();
 $rentRequests = $rentDao->list();
 
-echo phpinfo();
 ?>
 
 <!DOCTYPE html>
