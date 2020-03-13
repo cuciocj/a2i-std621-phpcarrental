@@ -32,7 +32,7 @@
                     }
                 }
             } else {
-                echo "vehcileDao: couldn't execute sql: " . $sql . " error: " . $con->error;
+                echo "vehicleDao: couldn't execute sql: " . $sql . " error: " . $con->error;
             }
             $con->close();
 
