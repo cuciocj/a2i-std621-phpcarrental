@@ -101,7 +101,7 @@
             $p_email = $user->getEmail();
             $p_role = $user->getRole();
 
-            if($stmt->execute() === true) {
+            if($stmt->execute()) {
                 $flag = true;
             }
 
@@ -153,7 +153,7 @@
 
             $p_id = $user->getId();
             
-            if($stmt->execute() === true) {
+            if($stmt->execute()) {
                 $flag = true;
             }
 

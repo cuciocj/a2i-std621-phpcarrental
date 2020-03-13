@@ -63,7 +63,7 @@
             $p_image = $vehicle->getImage();
             $p_price = $vehicle->getPrice();
 
-            if($stmt->execute() === true) {
+            if($stmt->execute()) {
                 $flag = true;
             }
 
@@ -101,7 +101,7 @@
             $p_isReserved = $vehicle->isReserved();
             $p_id = $vehicle->getId();
 
-            if($stmt->execute() === true) {
+            if($stmt->execute()) {
                 $flag = true;
             }
 
@@ -122,7 +122,7 @@
 
             $p_id = $vehicle->getId();
             
-            if($stmt->execute() === true) {
+            if($stmt->execute()) {
                 $flag = true;
             }
 

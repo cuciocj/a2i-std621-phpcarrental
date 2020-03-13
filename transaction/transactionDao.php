@@ -25,7 +25,7 @@
             $p_enddate = $transaction->getEndDate();
             $p_officer = $transaction->getApprovingOfficer();
 
-            if($stmt->execute() == true) {
+            if($stmt->execute()) {
                 $flag = true;
             } else {
                 echo "error sql:" . $con->error;

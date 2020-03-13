@@ -12,6 +12,7 @@ include_once 'userDao.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    $flag;
     $user;
     $userDao;
 
@@ -24,12 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $user->setEnabled(trim($_POST["is_enabled"]));
 
         $userDao = new UserDao();
-        if($userDao->update($user)) {
-            echo 'success';
-        } else {
-            echo 'fail';
-        }
-
+        $flag = $userDao->update($user);
     } else if ($_POST['mode'] == 'add') {
         $user = new User();
         $user->setName(trim($_POST["name"]));
@@ -39,22 +35,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $user->setRole(trim($_POST["role"]));
 
         $userDao = new UserDao();
-        if($userDao->create($user)) {
-            echo 'success';
-        } else {
-            echo 'fail';
-        }
+        $flag = $userDao->create($user);
     } else if ($_POST['mode'] == 'delete') {
         $user = new User();
         $user->setId(trim($_POST["id"]));
         $userDao = new UserDao();
-        if($userDao->delete($user)) {
-            echo 'success';
-        } else {
-            echo 'fail';
-        }
+        $flag = $userDao->delete($user);
     }
     
+    echo $flag === true ? 'success' : 'fail';
 }
 
 ?>
