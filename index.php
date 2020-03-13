@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // todo if staff goes to index.php, must redirect where he belongs
 
 include_once './commons/db.php';
@@ -9,6 +8,13 @@ include_once './vehicle/vehicleDao.php';
 
 if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
     echo 'Hello ' . $_SESSION["session_name"];
+    if(isset($_SESSION['session_role'])) {
+        if($_SESSION['session_role'] == 1) {
+            header("location: user_list.php");
+        } else if ($_SESSION['session_role'] == 2) {
+            header("location: car_list.php");
+        }
+    }
 }
 
 $vehicleDao = new VehicleDao();
