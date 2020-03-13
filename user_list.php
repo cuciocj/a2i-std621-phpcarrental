@@ -117,6 +117,36 @@ $users = $userDao->list();
                 });
             });
 
+            $('#btn_add').on('click', function() {
+                var userType = $('#roleLabel option:selected').text();
+                var roleType;
+                if (userType == "Admin") {
+                    roleType = 1;
+                } else if(userType == "Staff") {
+                    roleType = 2;
+                } else if(userType == "User") {
+                    roleType = 3;
+                }
+                
+                $.post('./user/userController.php', {
+                    mode: 'add',
+                    name: $('#add_user_name').val(),
+                    username: $('#add_user_username').val(),
+                    password: $('#add_user_password').val(),
+                    email: $('#add_user_email').val(),
+                    role: roleType
+                },
+                function(data, status, jqXHR) {
+                    if(data == 'success') {
+                        alert(userType + ' added successfully!');
+                        $('#addUserModal').modal('hide');
+                        location.reload();
+                    } else {
+                        alert('Adding ' + userType + ' failed. Please try again.');
+                    }
+                });
+            });
+
         });
     </script>
 </head>
@@ -125,6 +155,9 @@ $users = $userDao->list();
     <?php include './includes/header.php'; ?>
     <div class="container">
         <div class="row">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addUserModal">Add User</button>
+        </div>
+        <div class="row" style="padding-top: 1em;">
             <table id="userTable" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
@@ -139,6 +172,52 @@ $users = $userDao->list();
                     </tr>
                 </thead>
             </table>
+        </div>
+    </div>
+
+    <!-- Add USer Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div>
+                            <label for="name"><strong>Name</strong></label>
+                            <input type="text" id="add_user_name" class="form-control" name="name" value="">
+                        </div>
+                        <div>
+                            <label for="username"><strong>Username</strong></label>
+                            <input type="text" id="add_user_username" class="form-control" name="username" value="">
+                        </div>
+                        <div>
+                            <label for="password"><strong>Password</strong></label>
+                            <input type="password" id="add_user_password" class="form-control" name="password" value="">
+                        </div>
+                        <div>
+                            <label for="email"><strong>Email</strong></label>
+                            <input type="email" id="add_user_email" class="form-control" name="email" value="">
+                        </div>
+                        <div>
+                        <label for="roleLabel"><strong>Role</strong></label>
+                            <select class="form-control" id="roleLabel">
+                                <option>User</option>
+                                <option>Staff</option>
+                                <option>Admin</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="btn_add" type="button" class="btn btn-primary">Add User</button>
+                </div>
+            </div>
         </div>
     </div>
 
