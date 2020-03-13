@@ -3,6 +3,12 @@ session_start();
 
 if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
     echo 'Hello ' . $_SESSION["session_name"];
+    if(isset($_SESSION['session_role'])) {
+        if($_SESSION['session_role'] == 3) {
+            header("location: index.php");
+            exit;
+        }
+    }
 } else {
     header("location: login.php");
     exit;
