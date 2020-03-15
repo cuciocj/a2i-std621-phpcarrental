@@ -141,10 +141,10 @@ $vehicles = $vehicleDao->list();
 
     <br><br>
 
-    <?php foreach ($vehicles as $vehicle) { ?>
-        <div class="container">
-            <div class="row">
-                <div class="md-col-4" class='card' style='width: 18rem;'>
+    <div class="container">
+        <div class="row">
+            <?php foreach ($vehicles as $vehicle) { ?>
+                <div class="card col-4" style='width: 18rem; width: 100%;'>
                     <img src='<?= $vehicle->getImage() ?>' class='card-img-top' alt='...'>
                     <div class='card-body'>
                         <h5 class='card-title'><?= $vehicle->getName() ?></h5>
@@ -155,18 +155,9 @@ $vehicles = $vehicleDao->list();
                     </button>
                     <br><br>
                 </div>
-
-                <!-- <div class="md-col-4">
-                    <h3>This is the section for next car</h3><br><br>
-                </div>
-                <div class="md-col-4">
-                    <h3>This is the section for the next car3</h3><br><br>
-                </div> -->
-
-            </div>
-
+            <?php }; ?>
         </div>
-    <?php }; ?>
+    </div>
 
 
     <!-- Car Modal -->
