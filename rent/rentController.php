@@ -22,9 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $rent->setEndDate(trim($_POST["end_date"]));
     
         $rentDao = new RentDao();
-        $success = $rentDao->insert($rent);
-    
-        if($success) {
+        if($rentDao->insert($rent)) {
             // TODO: send acknowledgement receipt email
             echo 'success';
         } else {

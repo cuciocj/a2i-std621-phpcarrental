@@ -68,3 +68,6 @@ CREATE TABLE `user_feedbacks` (
   KEY `user_feedbacks_FK_user_id` (`user_id`),
   CONSTRAINT `user_feedbacks_FK_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- default order of roles
+INSERT INTO `roles` (id, name) VALUES (1, 'admin'), (2, 'customer'), (3, 'staff');

@@ -3,6 +3,12 @@ session_start();
 
 if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
     echo 'Hello ' . $_SESSION["session_name"];
+    if(isset($_SESSION['session_role'])) {
+        if($_SESSION['session_role'] == 3) {
+            header("location: index.php");
+            exit;
+        }
+    }
 } else {
     header("location: login.php");
     exit;
@@ -17,7 +23,6 @@ include_once './rent/rentDao.php';
 $rentDao = new RentDao();
 $rentRequests = $rentDao->list();
 
-echo phpinfo();
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +65,7 @@ echo phpinfo();
 
 <body>
     <?php include './includes/header.php'; ?>
-    <div class="container">
+    <div class="container" style="margin-top: 7em">
         <div class="row">
             <div class="col-12">
                 <table class="table table-image">
@@ -120,6 +125,7 @@ echo phpinfo();
             </div>
         </div>
     </div>
-</body>
 
+<?php include './includes/footer.php'; ?>
+</body>
 </html>
