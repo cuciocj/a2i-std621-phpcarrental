@@ -62,11 +62,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" type="text/css" href="css/nav.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="carAdmin/css/style.css" rel="stylesheet">
+
 
     
     
 </head>
+<body class="gray-bg">
+    <?php include './includes/header.php'; ?>
 
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">CRS</h1>
+
+            </div>
+            <h3>Welcome to Car Rental System</h3>
+            <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
+                
+            </p>
+            <p>Login in. To rent a car</p>
+            <form class="m-t" role="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
+                <div class="form-group">
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Username" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="">
+                </div>
+                <div class="form-group">
+                        <p><?php echo $captcha_error; ?></p>
+                        <div class="g-recaptcha" data-sitekey="6LcMLt4UAAAAAM8mkcVtez61P8hCQ4dxYqwBiOxl"></div>
+                        <br />
+                    </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                <a href="forgot_pw.php"><small>Forgot password?</small></a>
+                <p class="text-muted text-center"><small>Do not have an account?</small></p>
+                <a class="btn btn-sm btn-white btn-block" href="register.php">Create an account</a>
+            </form>
+            <p class="m-t"> <small>Car Rental System </small> </p>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+<!--
 <body>
     <?php include './includes/header.php'; ?>
     <br><br>
@@ -106,6 +152,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </div>
+-->
+
     <?php include './includes/footer.php'; ?>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

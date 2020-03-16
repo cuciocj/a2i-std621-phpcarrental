@@ -70,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <?php include './includes/header.php'; ?>
     <br><br>
+   
     <div class="container">
             <div class="row">
                 
@@ -77,26 +78,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <img src="images/reg.jpg" class="img img-thumbnail"/>
                 </div>
                 <div class="col-md-6">
-                        <form method="POST" action="CustomerRegister.php" required="">
+                        <form method="POST" action="user/UserDao.php" required="">
                         <div class="form-group">
-                            <label>Enter First Name </label>
-                            <input type="text"  name="txtFrstName" class="form-control" required=""/>
+                            <label>Enter Your Full Name </label>
+                            <input type="text"  name="name" class="form-control" required=""/>
                         </div>
                         <div class="form-group">
-                            <label>Enter Last Name </label>
-                            <input type="text"  name="txtLastName" class="form-control" required=""/>
+                            <label>Username </label>
+                            <input type="text"  name="username" class="form-control" required=""/>
+                        </div>
+                        <div class="form-group">
+                            <label>Enter Contact Number  </label>
+                            <input type="Number"  name="txtMob" class="form-control" required=""/>
                         </div>
                         <div class="form-group">
                             <label>Enter Email-Id </label>
                             <input type="Email"  name="txtEmail" class="form-control" required=""/>
                         </div>
-                        <div class="form-group">
-                            <label>Enter Contact  </label>
-                            <input type="Number"  name="txtMob" class="form-control" required=""/>
-                        </div>
+                        
                         <div class="form-group">
                             <label>Enter Password </label>
-                            <input type="password"  name="txtPassword" class="form-control" required=""/>
+                            <input type="password"  name="password" class="form-control" required=""/>
                         </div>
                         <div class="form-group">
                             <input type="submit"  value="submit" class="btn btn-primary" name="txtsubmit"/>
@@ -107,6 +109,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
         </div>
+    
+        <?php include './includes/footer.php'; ?>
 
 </body>
 
