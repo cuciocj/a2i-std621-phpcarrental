@@ -25,12 +25,12 @@ CREATE TABLE `users` (
   `email` varchar(30) NOT NULL,
   `date_joined` date NOT NULL,
   `role_id` int(11) NOT NULL,
+  `is_enabled` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`),
   KEY `role_id` (`role_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1
 
 CREATE TABLE `rent_requests` (
   `user_id` int(11) NOT NULL,
@@ -68,3 +68,6 @@ CREATE TABLE `user_feedbacks` (
   KEY `user_feedbacks_FK_user_id` (`user_id`),
   CONSTRAINT `user_feedbacks_FK_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- default order of roles
+INSERT INTO `roles` (id, name) VALUES (1, 'admin'), (2, 'customer'), (3, 'staff');

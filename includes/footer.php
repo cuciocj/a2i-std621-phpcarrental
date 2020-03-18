@@ -1,3 +1,29 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
+<script>
+  var map;
+  function initMap() {
+    var location = {lat: -36.857847, lng: 174.774992};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: location,
+      zoom: 14
+    });
+
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map,
+      title: 'We are here'
+    });
+
+    var infowindow = new google.maps.InfoWindow({
+        content: '<iframe title="YouTube video player" type="text/html" width="100%" height="100%" src="https://www.youtube.com/embed/VW-hTjBsEoA" frameborder="0"></iframe>'
+    });
+
+    google.maps.event.addListener(marker, 'click', function initialize() {
+        infowindow.open(map, marker);
+    });
+  }
+</script>
 <footer>
   <div class="container-fluid footercontainer">
     <div class="row">
@@ -73,10 +99,12 @@
       <!-- https://developers.google.com/maps/documentation/javascript/get-api-key -->
       <div class="col-md-4 footercol3">
         <h3>Find Us on Map</h3> <br>
-        <div id="googleMap" style="width:100%;height:200px;"></div>
+        <div id="googleMap" style="width:100%;height:200px;">
+          <div id="map"></div>
+        </div>
 
       </div>
-    </div>
+    </div> 
   </div>
   <div>
     <h6 class="footercopyright mb-0">Copyright 2020, <a href="#" class="footercopyright">Car Rental Services</a></h6>

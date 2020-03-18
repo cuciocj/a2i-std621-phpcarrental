@@ -9,6 +9,7 @@
         public $email;
         public $dateJoined;
         public $role;
+        public $isEnabled;
 
         public function getId() {
             return $this->id;
@@ -65,11 +66,14 @@
         public function setRole($role) {
             $this->role = $role;
         }
-    }
 
-    // sample user class
-    // $user = new User();
-    // $user->setUsername("sample_uname");
-    // $user->setRole(new Role(1, 'role_user'));
+        public function isEnabled() {
+            return $this->isEnabled;
+        }
+
+        public function setEnabled($isEnabled) {
+            $this->isEnabled = $isEnabled;
+        }
+    }
 
 ?>
