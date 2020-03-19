@@ -35,6 +35,20 @@
             $con->close();
             return $flag;
         }
+
+        public function getNonZeroNumberOfTransactionsPerCar() {
+            $sql = "select v.name, count(vehicle_id) as total_count 
+                    from transactions t
+                    join vehicles v on v.id = t.vehicle_id 
+                    group by vehicle_id	
+                    order by total_count desc";
+
+            $con = $this->db->getConnection();
+            $result = $con->query($sql);
+            $con->close();
+
+            return $result;
+        }
     }
 
 ?>
