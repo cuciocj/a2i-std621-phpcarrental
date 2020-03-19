@@ -23,6 +23,9 @@
                         <a class="menu_a" href="rent_request.php">Rent Requests</a>
                     </li>
                     <li class="menu_li">
+                        <a class="menu_a" href="report.php">Report</a>
+                    </li>
+                    <li class="menu_li">
                         <a class="menu_a" href="profile.php">Profile</a>
                     </li>
                     <li class="menu_li">
@@ -34,6 +37,9 @@
                     </li>
                     <li class="menu_li">
                         <a class="menu_a" href="rent_request.php">Rent Requests</a>
+                    </li>
+                    <li class="menu_li">
+                        <a class="menu_a" href="report.php">Report</a>
                     </li>
                     <li class="menu_li">
                         <a class="menu_a" href="profile.php">Profile</a>
