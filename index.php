@@ -150,8 +150,24 @@ $vehicles = $vehicleDao->list();
                         <h5 class='card-title'><?= $vehicle->getName() ?></h5>
                         <p class='card-text'>$ <?= $vehicle->getPrice() ?> per day</p>
                     </div>
-                    <button class='btn btn-primary' <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) { ?> data-toggle='modal' data-target='#carModal' data-info='<?= json_encode($vehicle); ?>' <?php } else { ?> onclick="location.href='login.php';" <?php } ?> <?php echo ($vehicle->isReserved() ? 'disabled' : ''); ?>>
-                        <?php echo ($vehicle->isReserved() ? 'Unavailable' : 'Rent this Car'); ?>
+                    <button class='btn btn-primary' 
+                        <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) { ?> 
+                            data-toggle='modal' data-target='#carModal' data-info='<?= json_encode($vehicle); ?>' 
+                        <?php } else { ?>
+                             onclick="location.href='login.php';" 
+                        <?php } ?> 
+                        <?php 
+                            if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+                                echo ($vehicle->isReserved() ? 'disabled' : ''); 
+                            }
+                        ?>>
+                        <?php 
+                            if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+                                echo ($vehicle->isReserved() ? 'Unavailable' : 'Rent this Car'); 
+                            } else {
+                                echo 'Rent this Car';
+                            }
+                        ?>
                     </button>
                     <br><br>
                 </div>
