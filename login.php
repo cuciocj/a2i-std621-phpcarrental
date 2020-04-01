@@ -39,10 +39,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($user->getRole() == 1) {
                 header("location: user_list.php");
+                exit;
             } else if ($user->getRole() == 2) {
                 header("location: car_list.php");
+                exit;
             } else {
                 header("location: index.php");
+                exit;
             }
         } else {
             echo 'not found';
