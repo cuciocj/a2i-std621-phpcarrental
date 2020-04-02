@@ -120,6 +120,7 @@ $vehicles = $vehicleDao->list();
             $('#btn_delete').on('click', function() {
                 
                 $.post('./vehicle/vehicleController.php?mode=delete', {
+                        mode: 'delete',
                         carId: carInfo.id
                     },
                     function(data, status, jqXHR) {
