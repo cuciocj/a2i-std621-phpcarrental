@@ -10,8 +10,10 @@ if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
     if (isset($_SESSION['session_role'])) {
         if ($_SESSION['session_role'] == 1) {
             header("location: user_list.php");
+            exit;
         } else if ($_SESSION['session_role'] == 2) {
             header("location: car_list.php");
+            exit;
         }
     }
 }
