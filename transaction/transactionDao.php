@@ -36,12 +36,49 @@
             return $flag;
         }
 
+        public function delete($transaction) {
+            $flag = false;
+
+            $sql = "delete from " . $this->table
+                . " where user_id = ?;";
+            
+            $con = $this->db->getConnection();
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("i", $p_id);
+
+            $p_id = $transaction->getId();
+            
+            if($stmt->execute()) {
+                $flag = true;
+            }
+
+            $stmt->close();
+            $con->close();
+            return $flag;
+        }
+
         public function getNonZeroNumberOfTransactionsPerCar() {
             $sql = "select v.name, count(vehicle_id) as total_count 
                     from transactions t
                     join vehicles v on v.id = t.vehicle_id 
                     group by vehicle_id	
                     order by total_count desc";
+
+            $con = $this->db->getConnection();
+            $result = $con->query($sql);
+            $con->close();
+
+            return $result;
+        }
+
+        public function getNumberOfTransactionsPerUser() {
+            $sql = "select 
+                        u.name,
+                        count(user_id) as count_per_user
+                    from transactions t 
+                        join users u on t.user_id = u.id
+                    group by user_id
+                    order by count_per_user desc";
 
             $con = $this->db->getConnection();
             $result = $con->query($sql);
