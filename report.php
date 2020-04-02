@@ -35,7 +35,7 @@ $transactionDao = new TransactionDao();
 
 <body>
     <?php include './includes/header.php'; ?>
-    <div class="container" style="margin-top: 7em">
+    <div class="container" style="margin-top: 0em">
         <div class="row">
             <div id='pieChart'><!-- Plotly chart will be drawn inside this DIV --></div>
             <div id='barGraph'><!-- Plotly chart will be drawn inside this DIV --></div>

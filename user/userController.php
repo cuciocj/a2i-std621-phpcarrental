@@ -33,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $userDao = new UserDao();
         $flag = $userDao->update($user);
-        header("location: /profile.php");
+        header("location: ../profile.php");
     } else if ($_POST['mode'] == 'add') {
         $user = new User();
         $user->setName(trim($_POST["name"]));
@@ -45,7 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $userDao = new UserDao();
         $flag = $userDao->create($user);
         if($flag == "success"){
-            header("Location: /login.php");
+            header("Location: ../login.php");
         }
     } else if ($_POST['mode'] == 'delete') {
         $user = new User();
