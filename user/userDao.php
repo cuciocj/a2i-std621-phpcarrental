@@ -51,6 +51,7 @@
         }
 
         public function findByEmail($email) {
+
             $sql = "select * from " . $this->table 
                 . " where username = ?;";
 
@@ -71,7 +72,44 @@
                         $user->setEmail($row['email']);
                         $user->setDateJoined($row['date_joined']);
                         $user->setRole($row['role_id']);
-                        $user->setEnabled($row['is_enabled']);
+                    }
+                } else {
+                    //echo "cannot find user [" . $user->getUsername() . "]";
+                    $user = new User();
+                }
+
+                $stmt->close();
+            } else {
+                //echo "couldn't execute sql: " . $sql . " error: " . $con->error;
+                $user = new User();
+            }
+            $con->close();
+
+            return $user;
+        }
+
+        public function findById($id) {
+
+            $sql = "select * from " . $this->table 
+                . " where id = ?;";
+
+            $con = $this->db->getConnection();
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("s", $id);
+
+            //$p_email = $email;
+            if($stmt->execute()) {
+                $result = $stmt->get_result();
+                if($result->num_rows > 0) {
+                    if($row = $result->fetch_array()) {
+                        $user = new User();
+                        $user->setId($row['id']);
+                        $user->setUsername($row['username']);
+                        $user->setPassword($row['password']);
+                        $user->setName($row['name']);
+                        $user->setEmail($row['email']);
+                        $user->setDateJoined($row['date_joined']);
+                        $user->setRole($row['role_id']);
                     }
                 } else {
                     //echo "cannot find user [" . $user->getUsername() . "]";
@@ -154,23 +192,23 @@
             $flag = false;
 
             $sql = "update " . $this->table
-                . " set username = ?, name = ?, email = ?, is_enabled = ? where id = ?;";
+                . " set username = ?, name = ?, email = ? where id = ?;";
 
             $con = $this->db->getConnection();
             $stmt = $con->prepare($sql);
-            $stmt->bind_param("sssii",
-                $p_username,
-                $p_name,
-                $p_email,
-                $p_isEnabled,
-                $p_id
-            );
 
             $p_username = $user->getUsername();
             $p_name = $user->getName();
             $p_email = $user->getEmail();
-            $p_isEnabled = $user->isEnabled();
             $p_id = $user->getId();
+
+
+            $stmt->bind_param("sssi",
+                $p_username,
+                $p_name,
+                $p_email,
+                $p_id
+            );
 
             if($stmt->execute()) {
                 $flag = true;

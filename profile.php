@@ -6,16 +6,10 @@ include_once './user/user.php';
 session_start();
 
 $user = new User();
-$user->setEmail($_SESSION["session_username"]);
 $userDao = new UserDao();
-$user = $userDao->findByEmail($user);
+$user = $userDao->findById($_SESSION["session_userid"]);
 
-var_dump($user);
-die;
-		
 
-$query = "select * from profile";
-$result = $conn->query($query);
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +26,8 @@ $result = $conn->query($query);
 </head>
 <body>
 
+<?php include './includes/header.php'; ?>
+
 	
     <div class="jumbotron">
       		
@@ -39,9 +35,8 @@ $result = $conn->query($query);
 
     <div class="container">
     	<div class="row">
-    		<div class="col-4">
+    		<div class="col-3">
     			
-
     		</div>
     			<div class="col-6">
   							<div class="panel panel-default">
@@ -52,21 +47,15 @@ $result = $conn->query($query);
 	    						</div>
     						</div>
 		    						<div class="panel panel-default">
-		    							<div class="panel-body">
-		    								
-		    							
+		    							<div class="panel-body">		    										    							
 			    							
-			    								<?php
-			    								while($row = $result->fetch_assoc()) {
-			    									
+			    								<?php			    									
 			    									echo "<h3><b>Name:</b></h3>";
-        											echo $row["name"]; echo "<br>";
+        											echo "<h3>".$user->name."</h3>"; echo "<br>";
         											echo "<h3><b>Username:</h3> </b>";
-			    								    echo $row["username"];echo "<br>";
+			    								    echo "<h3>".$user->username."</h3>";echo "<br>";
 			    									echo "<h3><b>Email:</b></h3><br>";
-			    									echo $row["email"];echo "<br><br>";
-			    									
-			    							}
+			    									echo "<h3>".$user->email."</h3>";echo "<br><br>";
 			    							?>	 
 
 			    							<button><a href="profile_update.php">update profile info </a></button>
@@ -82,8 +71,15 @@ $result = $conn->query($query);
   					
 				</div>
     			
-    		<div class="col-2"></div>
+    		<div class="col-3"></div>
     	</div>
-    </div>
+	</div>
+	
+
+	<?php include './includes/footer.php'; ?>
+	
+</body>
+
+</html>
 
     

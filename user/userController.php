@@ -30,10 +30,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $user->setUsername(trim($_POST["username"]));
         $user->setName(trim($_POST["name"]));
         $user->setEmail(trim($_POST["email"]));
-        $user->setEnabled(trim($_POST["is_enabled"]));
 
         $userDao = new UserDao();
         $flag = $userDao->update($user);
+        header("location: /profile.php");
     } else if ($_POST['mode'] == 'add') {
         $user = new User();
         $user->setName(trim($_POST["name"]));
