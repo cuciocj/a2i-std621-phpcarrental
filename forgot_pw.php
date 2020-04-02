@@ -30,11 +30,6 @@
                     <div class="col-6">
 
               <form id="form">
-                <p>Please enter your old password</p>
-
-              <input type="password" name="oldPw" id="oldPw" required="required" />
-              <br><br>
-
               <p>Please enter your email address to reset your password</p>
               <input type="email" name="ResetEmail" id="ResetEmail" placeholder="Email Address" required="required" />
               <br><br>

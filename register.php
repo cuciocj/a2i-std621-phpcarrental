@@ -90,10 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <label>Username </label>
                             <input type="text"  name="username" class="form-control" required=""/>
                         </div>
-                        <div class="form-group">
-                            <label>Enter Contact Number  </label>
-                            <input type="Number"  name="txtMob" class="form-control" required=""/>
-                        </div>
+                        
                         <div class="form-group">
                             <label>Enter Email-Id </label>
                             <input type="Email"  name="txtEmail" class="form-control" required=""/>
@@ -102,6 +99,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="form-group">
                             <label>Enter Password </label>
                             <input type="password"  name="password" class="form-control" required=""/>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password </label>
+                            <input type="password"  name="confirm_password" class="form-control" required=""/>
                         </div>
                         <div class="form-group">
                             <input type="submit"  value="submit" class="btn btn-primary" name="txtsubmit"/>

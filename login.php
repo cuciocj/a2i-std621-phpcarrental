@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     
 </head>
-<body class="gray-bg">
+<!-- <body class="gray-bg">
     <?php include './includes/header.php'; ?>
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
@@ -110,17 +110,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-    <!-- Mainly scripts -->
+    Mainly scripts 
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
 </body>
-<!--
+-->
 <body>
     <?php include './includes/header.php'; ?>
     <br><br>
     <div class="container">
-        <div class="row" style="margin-top: 7em">
+        <div class="row" style="margin-top: 2em">
             <div class="col-md-6">
                 <br><br>
                 <h3>CAR RENTAL SYSTEM</h3>
@@ -155,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </div>
--->
+
 
     <?php include './includes/footer.php'; ?>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
