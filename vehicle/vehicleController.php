@@ -33,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $vehicle->setPrice(trim($_POST["carPrice"]));
         $vehicle->setReserved(trim($_POST["carIsReserved"]));
         $flag = $vehicleDao->update($vehicle);
-    } else if ($mode == "delete") {
+    } else if ($_POST['mode'] == "delete") {
         $vehicle->setId(trim($_POST["carId"]));
         $flag = $vehicleDao->delete($vehicle);
     }
