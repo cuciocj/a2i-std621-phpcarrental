@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if($_POST['password'] != $_POST['confirm_password']){
             $_SESSION['response'] = "Password doesn't match";
-            header("Location: /register.php");
+            header("Location: ../register.php");
             die();
         }
         
@@ -50,14 +50,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $flag = $userDao->create($user);
 
         if($flag == "success"){
-<<<<<<< HEAD
             header("Location: ../login.php");
-=======
-            header("Location: /login.php");
         }elseif($flag == "already"){
             $_SESSION['response'] = 'Account already exists';
-            header("Location: /register.php");
->>>>>>> master
+            header("Location: ../register.php");
         }
     } else if ($_POST['mode'] == 'delete') {
         $user = new User();
