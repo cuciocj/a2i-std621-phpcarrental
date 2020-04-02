@@ -6,7 +6,7 @@ include_once './vehicle/vehicle.php';
 include_once './vehicle/vehicleDao.php';
 
 if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
-    echo 'Hello ' . $_SESSION["session_name"];
+    //echo 'Hello ' . $_SESSION["session_name"];
     if (isset($_SESSION['session_role'])) {
         if ($_SESSION['session_role'] == 1) {
             header("location: user_list.php");

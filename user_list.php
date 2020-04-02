@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION["loggedin"]) && !empty($_SESSION["loggedin"])) {
-    echo 'Hello ' . $_SESSION["session_name"];
+    //echo 'Hello ' . $_SESSION["session_name"];
     if (isset($_SESSION['session_role'])) {
         if ($_SESSION['session_role'] == 2) {
             header("location: car_list.php");
