@@ -73,54 +73,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     
 </head>
-<!-- <body class="gray-bg">
-    <?php include './includes/header.php'; ?>
-
-    <div class="middle-box text-center loginscreen animated fadeInDown">
-        <div>
-            <div>
-
-                <h1 class="logo-name">CRS</h1>
-
-            </div>
-            <h3>Welcome to Car Rental System</h3>
-            <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
-                
-            </p>
-            <p>Login in. To rent a car</p>
-            <form class="m-t" role="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
-                <div class="form-group">
-                    <input type="text" name="username" id="username" class="form-control" placeholder="Username" required="">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="">
-                </div>
-                <div class="form-group">
-                        <p><?php echo $captcha_error; ?></p>
-                        <div class="g-recaptcha" data-sitekey="6LcMLt4UAAAAAM8mkcVtez61P8hCQ4dxYqwBiOxl"></div>
-                        <br />
-                    </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
-
-                <a href="forgot_pw.php"><small>Forgot password?</small></a>
-                <p class="text-muted text-center"><small>Do not have an account?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="register.php">Create an account</a>
-            </form>
-            <p class="m-t"> <small>Car Rental System </small> </p>
-        </div>
-    </div>
-
-    Mainly scripts 
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-
-</body>
--->
 <body>
     <?php include './includes/header.php'; ?>
     <br><br>
     <div class="container">
-        <div class="row" style="margin-top: 2em">
+        <div class="row" style="margin-top: 2em; padding-bottom: 15%;">
             <div class="col-md-6">
                 <br><br>
                 <h3>CAR RENTAL SYSTEM</h3>
@@ -133,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                        <small id="emailHelp" class="form-text text-muted text-right"><a href="forgotpassword.php">Forgot Password</a></small>
+                        <small id="emailHelp" class="form-text text-muted text-right"><a href="forgotpassword.php">Forgot Password?</a></small>
                     </div>
                     <div class="form-group">
                         <p><?php echo $captcha_error; ?></p>
@@ -144,10 +101,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary">Sign In</button>
                         </div>
-                        <div class="col-4"></div>
+                        <!-- <div class="col-4"></div>
                         <div class="col-4">
                             <a href="forgot_pw.php">Forgot Password?</a>
-                        </div>
+                        </div> -->
                     </div>
                     
                 </form>
