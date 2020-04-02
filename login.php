@@ -79,12 +79,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-md-6">
                 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
                     <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" class="form-control" id="username" name="username">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                     </div>
                     <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        <small id="emailHelp" class="form-text text-muted text-right"><a href="forgotpassword.php">Forgot Password</a></small>
                     </div>
                     <div class="form-group">
                         <p><?php echo $captcha_error; ?></p>
