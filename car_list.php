@@ -140,7 +140,7 @@ $vehicles = $vehicleDao->list();
 <body>
     <?php include './includes/header.php'; ?>
 
-    <div class="container" style="margin-top: 7em">
+    <div class="container" style="padding-top: 10%">
         <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addCarModal">Add Car</button>
         <div class="row">
             <div class="col-12">
