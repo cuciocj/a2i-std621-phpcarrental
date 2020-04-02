@@ -1,7 +1,5 @@
 <?php
 
-
-
 session_start();
 
 // var_dump($_SESSION["loggedin"]);
@@ -23,7 +21,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $user;
     $userDao;
 
-
     if ($_POST['mode'] == 'update') {
         $user = new User();
         $user->setId(trim($_POST["id"]));
@@ -35,6 +32,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $flag = $userDao->update($user);
         header("location: ../profile.php");
     } else if ($_POST['mode'] == 'add') {
+
+        if($_POST['password'] != $_POST['confirm_password']){
+            $_SESSION['response'] = "Password doesn't match";
+            header("Location: /register.php");
+            die();
+        }
+        
         $user = new User();
         $user->setName(trim($_POST["name"]));
         $user->setUsername(trim($_POST["username"]));
@@ -44,8 +48,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $userDao = new UserDao();
         $flag = $userDao->create($user);
+
         if($flag == "success"){
+<<<<<<< HEAD
             header("Location: ../login.php");
+=======
+            header("Location: /login.php");
+        }elseif($flag == "already"){
+            $_SESSION['response'] = 'Account already exists';
+            header("Location: /register.php");
+>>>>>>> master
         }
     } else if ($_POST['mode'] == 'delete') {
         $user = new User();
