@@ -26,7 +26,7 @@ $result = $conn->query($query);
     <div class="container">
     	<div class="row">
     		<div class="col-4">
-    			<img class="profile_img" class="responsive" src = " images/sagpp.jpg ">
+    			
 
     		</div>
     			<div class="col-6">
@@ -47,14 +47,11 @@ $result = $conn->query($query);
 			    									
 			    									echo "<h3><b>Name:</b></h3>";
         											echo $row["name"]; echo "<br>";
-        											echo "<h3><b>Address:</h3> </b>";
-			    								    echo $row["address"];echo "<br>";
+        											echo "<h3><b>Username:</h3> </b>";
+			    								    echo $row["username"];echo "<br>";
 			    									echo "<h3><b>Email:</b></h3><br>";
-			    									echo $row["email"];echo "<br>";
-			    									echo "<h3><b>Contact Number:</b></h3> <br>";
-			    									echo $row["contact"];echo "<br>";
-			    									echo "<h3><b>Short Description:</b></h3>";
-			    									echo $row["description"];echo "<br><br>";
+			    									echo $row["email"];echo "<br><br>";
+			    									
 			    							}
 			    							?>	 
 

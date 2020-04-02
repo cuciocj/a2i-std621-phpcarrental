@@ -20,7 +20,7 @@
     <div class="container">
     	<div class="row">
     		<div class="col-4">
-    			<img class="profile_img" class="responsive" src="images/sagpp.jpg">
+    			
     		</div>
     			<div class="col-6">
   							<div class="panel panel-default">
@@ -35,16 +35,11 @@
                                 <div class="panel-body">
                                     <label><h4><b>Name:</b></h4></label> <br>
                                     <input type="text" name="name" placeholder="update name"  class = "inputBox" >
-                                    <h4><b>Address:</h4> </b> <br>
-                                    <input type="text" name="address" placeholder="update Address" class = "inputBox">
+                                    <h4><b>Username:</h4> </b> <br>
+                                    <input type="text" name="username" placeholder="update Username" class = "inputBox">
                                     <h4><b>Email:</b></h4> <br>
                                     <input type="text" name="email" placeholder="update Email" class = "inputBox" required="required">
-                                    <h4><b>Contact Number:</b></h4> <br>
-                                    <input type="text" name="number" class = "inputBox" placeholder="update Contact Number">
-                                    <h4><b>Short Description:</b></h4> <br>
-                                    <input type="text" name="description" class = "inputBox" placeholder="update Description"><br><br>
-                                    <h3><b>Select Profile Picture:</b></h3> <br>
-                                    <input type="file" name="picture" id="picture">
+                                    
                                     <input type="submit" value="Update">
                                     
                                 </div>
