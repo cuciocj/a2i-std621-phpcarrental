@@ -1,11 +1,8 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
-
-require './PHPMailer/Exception.php';
-require './PHPMailer/PHPMailer.php';
-require './PHPMailer/SMTP.php';
 
 
 class EmailSender {
@@ -22,7 +19,7 @@ class EmailSender {
         $mail = new PHPMailer(true);
 
         try {
-            // $mail->SMTPDebug = SMTP::DEBUG_SERVER; // Enable verbose debug output; for testing purposes
+            //$mail->SMTPDebug = SMTP::DEBUG_SERVER; // Enable verbose debug output; for testing purposes
             $mail->isSMTP();
             $mail->SMTPAuth   = true;
             $mail->Host       = $this->credentials->host;
