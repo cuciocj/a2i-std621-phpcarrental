@@ -6,11 +6,19 @@ if (!(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)) {
     exit;
 }
 
+require '../PHPMailer/Exception.php';
+require '../PHPMailer/PHPMailer.php';
+require '../PHPMailer/SMTP.php';
 include_once '../commons/db.php';
+include_once '../commons/emailsender.php';
 include_once '../transaction/transaction.php';
+include_once '../transaction/transactionDao.php';
+require_once '../mailer/Mailer.php';
+require_once '../mailer/mailerDao.php';
+require_once '../user/user.php';
+require_once '../user/userDao.php';
 include_once 'rent.php';
 include_once 'rentDao.php';
-include_once '../transaction/transactionDao.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -23,7 +31,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     
         $rentDao = new RentDao();
         if($rentDao->insert($rent)) {
-            // TODO: send acknowledgement receipt email
+            $user = new User();
+            $userDao = new UserDao();
+            $user = $userDao->findById($rent->getUser());
+
+            $emailsender = new EmailSender();
+            $is_success = $emailsender->send(
+                $user->getEmail(), 
+                $user->getUsername(),
+                'Rent a Car - Confirmation',
+                'Hello ' . $user->getUsername() . ',<br><br>
+                    This is to confirm your car booking in Rent a Car system starting ' 
+                        . $rent->getStartDate() . ' until ' . $rent->getEndDate() . '.<br>
+                        Confirmation might take to 3-5 minutes<br><br>
+                        Regards,<br>
+                        Rent A Car'
+            );
+                
             echo 'success';
         } else {
             echo 'fail';
@@ -60,41 +84,49 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                 }
 
-                echo '$senderEmail';
-
-                $senderEmail = 'cuciocj@gmail.com';
-                $header = 'From: ' . $senderEmail;
-                $recipient = '' . $data['user']['email'] . '';
+                $recipient = $data['user']['email'];
                 $subject = 'Booking Successful';
-                $body = 'Hi ' . $data['user']['username'] . ', ' . "\r\n" . "\r\n" 
-                    . ' Your rental request for ' . $data['vehicle']['name'] .' from ' . $data['startDate'] 
-                    . ' to ' . $data['endDate'] . ' has been accepted.' . "\r\n"
-                    . 'You can pay for the booking via 3 options: Cash, debit or credit card (Visa, Mastercard, AMEX)' . "\r\n" .  "\r\n"
-                    . 'Thank you,' . "\r\n"
-                    . 'CAR RENTAL SYSTEM';
+                $body = 'Hi ' . $data['user']['username'] . ',
+                    <br><br>
+                    Congratulations! Your rental request for '. $data['vehicle']['name'] . ' 
+                    from ' . $data['startDate'] . ' until ' .  $data['endDate'] . ' has been accepted.
+                    <br><br>
+                    You can pay for the booking via: Visa, Mastercard, AMEX.
+                    <br><br>
+                    PS: ' . $_POST['msg'] . '
+                    <br><br>
+                    Thank you,
+                    RENT A CAR SYSTEM';
 
-                if (mail($recipient, $subject, $body, $header)) {
-                    echo "email successful";
-                } else {
-                    echo "email not successful";
-                }
+                $emailSender = new EmailSender();
+                $emailSender->send($recipient,
+                        $data['user']['username'],
+                        $subject,
+                        $body
+                );
+
+                $transactionDao = new TransactionDao();
+                $transactionDao->delete($data['user']['id']);
 
             } else if($status == "reject") {
-                $senderEmail = 'cuciocj@gmail.com';
-                $header = 'From: ' . $senderEmail;
-                $recipient = '' . $data['user']['email'] . '';
-                $subject = 'Booking Rejected';
-                $body = 'Hi ' . $data['user']['username'] . ', ' . "\r\n" . "\r\n" 
-                        . ' We are sorry to inform you that your rental request was rejected.' . "\r\n" .
-                        (strlen($msg) > 0 ? $msg : '')
-                        . 'Regards,' . "\r\n"
-                        . 'Awesome Rental Car Team';
 
-                if (mail($recipient, $subject, $body, $header)) {
-                    echo "email successful";
-                } else {
-                    echo "email not successful";
-                }
+                $recipient = $data['user']['email'];
+                $subject = 'Booking Rejected';
+                $body = 'Hi ' . $data['user']['username'] . ',
+                <br><br>
+                We are sorry to inform you that your rental request was rejected.
+
+                PS: ' . $_POST['msg'] . '
+
+                Thank you,
+                RENT A CAR SYSTEM';
+
+                $emailSender = new EmailSender();
+                $emailSender->send($recipient,
+                        $data['user']['username'],
+                        $subject,
+                        $body
+                );
 
 
             }
