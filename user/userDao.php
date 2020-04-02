@@ -156,6 +156,26 @@
         }
 
         public function create($user) {
+            
+
+            $sql = "select * from " . $this->table 
+                . " where email = ? or username = ?;";
+
+            $con = $this->db->getConnection();
+            $stmt = $con->prepare($sql);
+
+            $email = $user->getEmail();
+            $username = $user->getUsername();
+
+            $stmt->bind_param("ss", $email, $username);
+    
+            //$p_email = $email;
+            if($stmt->execute()) {
+                $result = $stmt->get_result();
+                if($result->num_rows > 0) {
+                    return "already";
+                }
+            }
 
 
             $flag = false;

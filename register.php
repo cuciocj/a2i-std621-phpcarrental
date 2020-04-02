@@ -2,6 +2,7 @@
 session_start();
 $captcha_error = "";
 
+
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     header("location: index.php");
     exit;
@@ -77,10 +78,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
             <div class="row">
                 
+                
                 <div class="col-md-6">
                     <img src="images/reg.jpg" class="img img-thumbnail"/>
                 </div>
                 <div class="col-md-6">
+                        
+                            <?php 
+                                if(!empty($_SESSION['response'])) {
+                                echo "<h2>".$message = $_SESSION['response']."</h2>";
+                                unset($_SESSION['response']);
+                                }
+                            ?>
                         <form method="POST" action="user/userController.php" required="">
                         <div class="form-group">
                             <label>Enter Your Full Name </label>

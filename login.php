@@ -90,17 +90,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-md-6">
                 <br><br>
                 <h3>CAR RENTAL SYSTEM</h3>
-
             </div>
             <div class="col-md-6">
                 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
-                    <h3>
-                        <?php 
-                            if(!empty($_SESSION['response'])) {
-                               echo $message = $_SESSION['response'];
-                            }
-                        ?>
-                    </h3>
+                            <?php 
+                                if(!empty($_SESSION['response'])) {
+                                echo "<h2>".$message = $_SESSION['response']."</h2>";
+                                unset($_SESSION['response']);
+                                }
+                            ?>
                     <div class="form-group">
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                     </div>
