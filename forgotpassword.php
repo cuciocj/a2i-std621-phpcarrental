@@ -7,12 +7,16 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     exit;
 }
 
+require 'PHPMailer/Exception.php';
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+
+require_once 'commons/emailsender.php';
 require_once 'commons/db.php';
 require_once 'mailer/Mailer.php';
 require_once 'mailer/mailerDao.php';
 require_once 'user/user.php';
 require_once 'user/userDao.php';
-require_once 'commons/emailsender.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $userDao = new UserDao();
@@ -21,11 +25,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if(isset($user)) {
         $emailsender = new EmailSender();
-        // $is_success = $emailsender->send(
-        //     $user->getEmail(), 
-        //     $user->getUsername(),
-        //     'Password Recovery',
-        //     'Your password for account <b>' . $user->getUsername() . '</b> is: ' . $user->getPassword());
+        $is_success = $emailsender->send(
+            $user->getEmail(), 
+            $user->getUsername(),
+            'Password Recovery',
+            'Your password for account <b>' . $user->getUsername() . '</b> is: ' . $user->getPassword());
     }
 
     $response = "We've sent an email to your account for instructions to recover your password.";
