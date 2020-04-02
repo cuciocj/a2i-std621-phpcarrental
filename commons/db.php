@@ -2,7 +2,7 @@
     class DB {
 
         public function getConnection() {
-            $mysqli = mysqli_connect('localhost', 'aspire2', 'aspire2', 'rentacarsystem');
+            $mysqli = mysqli_connect('localhost', 'homestead', 'secret', 'rentacarsystem');
             $sql_msg = "";
 
             if($mysqli === false) {

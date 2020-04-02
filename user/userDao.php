@@ -12,7 +12,7 @@
 
         public function find($user) {
             $sql = "select * from " . $this->table 
-                . " where username = ? and password = ? and is_enabled = 1;";
+                . " where username = ? and password = ?;";
 
             $con = $this->db->getConnection();
             $stmt = $con->prepare($sql);
@@ -52,14 +52,13 @@
 
         public function findByEmail($email) {
             $sql = "select * from " . $this->table 
-                . " where email = ?;";
+                . " where username = ?;";
 
             $con = $this->db->getConnection();
             $stmt = $con->prepare($sql);
-            $stmt->bind_param("s", $p_email);
+            $stmt->bind_param("s", $email);
 
-            $p_email = $email;
-
+            //$p_email = $email;
             if($stmt->execute()) {
                 $result = $stmt->get_result();
                 if($result->num_rows > 0) {
@@ -119,6 +118,8 @@
         }
 
         public function create($user) {
+
+
             $flag = false;
 
             $sql = "insert into " . $this->table . " (username, password, name, email, date_joined, role_id)"

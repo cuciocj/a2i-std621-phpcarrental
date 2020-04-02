@@ -1,6 +1,6 @@
 <?php
 
-$mysqli = new mysqli("localhost","aspire2","aspire2","rentacarsystem");
+$mysqli = new mysqli("localhost","homestead","secret","rentacarsystem");
 
 // Check connection
 if ($mysqli -> connect_errno) {

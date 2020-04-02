@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <img src="images/reg.jpg" class="img img-thumbnail"/>
                 </div>
                 <div class="col-md-6">
-                        <form method="POST" action="user/UserDao.php" required="">
+                        <form method="POST" action="user/userController.php" required="">
                         <div class="form-group">
                             <label>Enter Your Full Name </label>
                             <input type="text"  name="name" class="form-control" required=""/>
@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                         <div class="form-group">
                             <label>Enter Email-Id </label>
-                            <input type="Email"  name="txtEmail" class="form-control" required=""/>
+                            <input type="Email"  name="email" class="form-control" required=""/>
                         </div>
                         
                         <div class="form-group">
@@ -107,6 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="form-group">
                             <input type="submit"  value="submit" class="btn btn-primary" name="txtsubmit"/>
                         </div>
+                        <input type="hidden" name="mode" value="add" />
                         </form>
                 </div>
                         

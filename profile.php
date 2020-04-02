@@ -1,5 +1,19 @@
 <?php 
-include_once('db_connect.php');
+include_once './commons/db.php';
+include_once './user/userDao.php';
+include_once './role/role.php';
+include_once './user/user.php';
+session_start();
+
+$user = new User();
+$user->setEmail($_SESSION["session_username"]);
+$userDao = new UserDao();
+$user = $userDao->findByEmail($user);
+
+var_dump($user);
+die;
+		
+
 $query = "select * from profile";
 $result = $conn->query($query);
 ?>

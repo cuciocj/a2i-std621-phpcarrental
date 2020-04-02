@@ -1,13 +1,20 @@
 <?php
+
+
+
 session_start();
 
-if (!(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)) {
-    header("location: login.php");
-    exit;
-}
+// var_dump($_SESSION["loggedin"]);
+// die();
+
+// if (!(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)) {
+//     header("location: /login.php");
+//     exit;
+// }
 
 include_once '../commons/db.php';
 include_once 'user.php';
+
 include_once 'userDao.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -15,6 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $flag;
     $user;
     $userDao;
+
 
     if ($_POST['mode'] == 'update') {
         $user = new User();
@@ -32,10 +40,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $user->setUsername(trim($_POST["username"]));
         $user->setPassword(trim($_POST["password"]));
         $user->setEmail(trim($_POST["email"]));
-        $user->setRole(trim($_POST["role"]));
+        $user->setRole(3);
 
         $userDao = new UserDao();
         $flag = $userDao->create($user);
+        if($flag == "success"){
+            header("Location: /login.php");
+        }
     } else if ($_POST['mode'] == 'delete') {
         $user = new User();
         $user->setId(trim($_POST["id"]));

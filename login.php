@@ -15,22 +15,30 @@ include_once './user/user.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    
     $captcha;
     if (isset($_POST['g-recaptcha-response'])) {
         $captcha = $_POST['g-recaptcha-response'];
     }
 
+
     if (!$captcha) {
         $captcha_error = "Please check the the captcha form.";
     } else {
+
         $user = new User();
         $user->setUsername(trim($_POST["username"]));
         $user->setPassword(trim($_POST["password"]));
+        
         $userDao = new UserDao();
+
+        
 
         $user = $userDao->find($user);
 
         if (null !== $user->getId()) {
+
+            unset($_SESSION['response']);
             $_SESSION["loggedin"] = true;
             $_SESSION["session_userid"] = $user->getId();
             $_SESSION["session_username"] = $user->getUsername();
@@ -48,7 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit;
             }
         } else {
-            echo 'not found';
+            $_SESSION['response'] = 'Invalid Login Credentials';
+            header("location: /login.php");
         }
     }
 }
@@ -85,6 +94,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="col-md-6">
                 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
+                    <h3>
+                        <?php 
+                            if(!empty($_SESSION['response'])) {
+                               echo $message = $_SESSION['response'];
+                            }
+                        ?>
+                    </h3>
                     <div class="form-group">
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                     </div>
@@ -94,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="form-group">
                         <p><?php echo $captcha_error; ?></p>
-                        <div class="g-recaptcha" data-sitekey="6LcMLt4UAAAAAM8mkcVtez61P8hCQ4dxYqwBiOxl"></div>
+                        <div class="g-recaptcha" data-sitekey="6LewFOYUAAAAAKUNg_LBUKnPYAho4pNd9Ny6oE_K"></div>
                         <br />
                     </div>
                     <div class="row">
