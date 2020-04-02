@@ -35,7 +35,7 @@ $transactionDao = new TransactionDao();
 
 <body>
     <?php include './includes/header.php'; ?>
-    <div class="container" style="margin-top: 7em">
+    <div class="container" style="padding-top: 15%">
         <div class="row">
             <div id='pieChart'><!-- Plotly chart will be drawn inside this DIV --></div>
             <div id='barGraph'><!-- Plotly chart will be drawn inside this DIV --></div>
@@ -77,14 +77,28 @@ $transactionDao = new TransactionDao();
     Plotly.newPlot('pieChart', pieData, pieLayout);
 </script>
 <script>
+    var barValues = [];
+    var barLabels = [];
+
+    <?php $resultSet = $transactionDao->getNumberOfTransactionsPerUser(); ?>
+    <?php
+        while($row = $resultSet->fetch_array()) { 
+    ?>
+            barValues[index] = <?php echo $row['count_per_user']; ?>;
+            barLabels[index] = '<?php echo $row['name']; ?>';
+            index = index + 1;
+    <?php
+        } 
+    ?>
+    
     var data = [{
-        x: ['giraffes', 'orangutans', 'monkeys'],
-        y: [20, 14, 23],
+        x: barLabels,
+        y: barValues,
         type: 'bar'
     }];
 
     var barLayout = {
-        title: 'Bar Graph Example',
+        title: 'Number of Bookings Per User',
         height: 400,
         width: 600
     };
