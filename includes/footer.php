@@ -42,13 +42,6 @@
       <div class="col-md-2 footercol2">
         <h3>LINKS 1</h3>
         <ul>
-          <!-- 
-            <li> <a class="footercol2content" href="index.html">Home</a> <br> </li> <br>
-            <li> <a class="footercol2content" href="our-services.html">Services</a><br> </li> <br>
-            <li> <a class="footercol2content" href="our-services.html">About Us</a><br> </li> <br>
-            <li> <a class="footercol2content" href="our-services.html">Contact</a><br> </li> <br>
-            -->
-
           <?php
           if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
             echo '<footer>'
@@ -70,12 +63,6 @@
       <div class="col-md-2 footercol2">
         <h3>LINKS 2</h3>
         <ul>
-          <!-- 
-            <li> <a class="footercol2content" href="index.html">Home</a> <br> </li> <br>
-            <li> <a class="footercol2content" href="our-services.html">Services</a><br> </li> <br>
-            <li> <a class="footercol2content" href="our-services.html">About Us</a><br> </li> <br>
-            <li> <a class="footercol2content" href="our-services.html">Contact</a><br> </li> <br>
-        -->
           <?php
           if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
             echo '<footer>'
